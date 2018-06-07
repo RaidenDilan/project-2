@@ -1,6 +1,6 @@
-const rp = require('request-promise');
-const oauth = require('../config/oauth');
-const User = require('../models/user');
+const rp      = require('request-promise');
+const oauth   = require('../config/oauth');
+const User    = require('../models/user');
 
 function github(req, res, next) {
   return rp({

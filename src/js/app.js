@@ -1,31 +1,13 @@
-// 'use strict';
-/* global google:ignore mapStyles :ignore */
-
 $(() => {
-  // var $header = $('header');
-  // var $window = $(window);
   var $links = $('nav a');
   var $menu = $('.menu');
-  // initMap();
 
-  // $window.scroll(updateHeader).trigger('scroll');
   $links.on('click');
   $menu.on('click', toggleMenu);
 
   function toggleMenu() {
     $('.dropdown').slideToggle();
   }
-
-  // function updateHeader() {
-  //   var bottomOfHeader = $header.offset().top + $header.height();
-  //   var h2Height = $window.height();
-  //
-  //   if (bottomOfHeader >= h2Height) {
-  //     $header.addClass('opaque');
-  //   } else {
-  //     $header.removeClass('opaque');
-  //   }
-  // }
 //--------------------------------AUTOCOMPLETE--------------------------------//
   const $input = $('.autocomplete');
 
@@ -40,7 +22,6 @@ $(() => {
       const location = place.geometry.location.toJSON();
       $lat.val(location.lat);
       $lng.val(location.lng);
-      // console.log($lat.val(), $lng.val());
     });
   }
 //-----------------------------------WEATHER----------------------------------//
@@ -55,33 +36,21 @@ $(() => {
 
     $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/${lat},${lng}.json`)
     .done((response) => {
-      // console.log(response);
       const country = response.location.country;
       const city = response.location.city;
 
       $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/forecast/q/${country}/${city}.json`)
       .done((response) => {
-        // console.log(response);
-        // const location = `${country}, ${city}`;
-        // const snowfall = response.forecast.simpleforecast.forecastday[0].snow_allday.in;
         $weather.append(`<p><strong>Snowfall:</strong> ${response.forecast.simpleforecast.forecastday[0].snow_allday.in} Inches</p>`);
-        // console.log(response.forecast.simpleforecast.forecastday[0].snow_allday.in);
 
         $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/conditions/q/${country}/${city}.json`)
         .done((response) => {
-          // console.log(response);
           $weather.append(`<p><strong>Temperature:</strong> ${response.current_observation.temp_c}°C</p>`);
-          // console.log(response.current_observation.temp_c);
           $weather.append(`<p><strong>Temperature:</strong> ${response.current_observation.temp_f}°F</p>`);
-          // console.log(response.current_observation.temp_f);
           $weather.append(`<p><strong>Weather:</strong> ${response.current_observation.weather}</p>`);
-          // console.log(response.current_observation.weather);
           $weather.append(`<p><strong>Visibility:</strong> ${response.current_observation.visibility_mi} Miles</p>`);
-          // console.log(response.current_observation.visibility_mi);
           $weather.append(`<p><strong>Visibility:</strong> ${response.current_observation.visibility_km} Kilometres</p>`);
-          // console.log(response.current_observation.visibility_km);
           $weather.append(`<p><strong>Wind Condition:</strong> ${response.current_observation.wind_string}</p>`);
-          // console.log(response.current_observation.wind_string);
         });
       });
     });

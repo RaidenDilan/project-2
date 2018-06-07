@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const oauth = require('../config/oauth');
+const User    = require('../models/user');
+const oauth   = require('../config/oauth');
 
 function sessionsNew(req, res) {
   res.render('sessions/new', { oauth });

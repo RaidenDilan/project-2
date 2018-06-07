@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const s3 = require('../lib/s3');
+const mongoose  = require('mongoose');
+const bcrypt    = require('bcrypt');
+const s3        = require('../lib/s3');
 
 const imageSchema = new mongoose.Schema({
   filename: { type: String },

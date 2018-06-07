@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
+// const s3        = require('../lib/s3');
 
 const commentSchema = new mongoose.Schema({
   content: { type: String },

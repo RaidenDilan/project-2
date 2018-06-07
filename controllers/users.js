@@ -1,6 +1,6 @@
-const User = require('../models/user');
-const Promise = require('bluebird');
-const s3 = Promise.promisifyAll(require('../lib/s3'));
+const User      = require('../models/user');
+const Promise   = require('bluebird');
+const s3        = Promise.promisifyAll(require('../lib/s3'));
 
 function showRoute(req, res, next) {
   User
