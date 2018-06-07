@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resorts</title>
+    <link rel="icon" type="image/png" href="/assets/images/logos/resorts.png"/>
+    <%# <link rel="icon" type="image/jpg" href="http://previews.123rf.com/images/istone_hun/istone_hun1301/istone_hun130100226/17222865-Extreme-snowboard-mask-logo-magazin-flyer-background--Stock-Photo.jpg"/>%>
+    <% include ./partials/scripts %>
+  </head>
+  <body class="site">
+    <% include ./partials/navbar %>
+    <% for(const type in messages) { %>
+      <div class="<%= type %>">
+        <h5><%= messages[type] %></h5>
+      </div>
+    <% } %>
+    <main class="site-content">
+      <%- body %>
+    </main>
+    <% include ./partials/spreadsheets %>
+    <footer>
+      <a href="/about"><p class="logo1">About</p></a>
+      <a href="https://github.com/RaidenDilan" target="_blank"><img src="/assets/images/logos/github2.png" type="image/png" alt="github logo" class="logo"></a>
+      <a href="https://www.linkedin.com/in/raidendilan" target="_blank"><img src="/assets/images/logos/linkedin.png" type="image/png" alt="github logo" class="logo"></a>
+      <a href="mailto:raiden18@me.com" target="_blank"><img src="/assets/images/logos/email.png" type="image/png" alt="github logo" class="logo"></a>
+      <p>Designed &amp; Developed by Raiden Dilan &copy; General Assembly 2017</p>
+    </footer>
+  </body>
+</html>

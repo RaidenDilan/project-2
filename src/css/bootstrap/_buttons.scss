@@ -1,0 +1,170 @@
+// scss-lint:disable QualifyingElement
+
+//
+// Base styles
+//
+
+.buttons {
+  display: inline-block;
+  font-weight: $buttons-font-weight;
+  line-height: $buttons-line-height;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: $input-buttons-border-width solid transparent;
+  @include button-size($buttons-padding-y, $buttons-padding-x, $font-size-base, $buttons-border-radius);
+  @include transition($buttons-transition);
+
+  // Share hover and focus styles
+  @include hover-focus {
+    text-decoration: none;
+  }
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: $buttons-focus-box-shadow;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    cursor: $cursor-disabled;
+    opacity: .65;
+    @include box-shadow(none);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    @include box-shadow($buttons-focus-box-shadow, $buttons-active-box-shadow);
+  }
+}
+
+// Future-proof disabling of clicks on `<a>` elements
+a.buttons.disabled,
+fieldset[disabled] a.buttons {
+  pointer-events: none;
+}
+
+
+//
+// Alternate buttons
+//
+
+.buttons-primary {
+  @include button-variant($buttons-primary-color, $buttons-primary-bg, $buttons-primary-border);
+}
+.buttons-secondary {
+  @include button-variant($buttons-secondary-color, $buttons-secondary-bg, $buttons-secondary-border);
+}
+.buttons-info {
+  @include button-variant($buttons-info-color, $buttons-info-bg, $buttons-info-border);
+}
+.buttons-success {
+  @include button-variant($buttons-success-color, $buttons-success-bg, $buttons-success-border);
+}
+.buttons-warning {
+  @include button-variant($buttons-warning-color, $buttons-warning-bg, $buttons-warning-border);
+}
+.buttons-danger {
+  @include button-variant($buttons-danger-color, $buttons-danger-bg, $buttons-danger-border);
+}
+
+// Remove all backgrounds
+.buttons-outline-primary {
+  @include button-outline-variant($buttons-primary-bg);
+}
+.buttons-outline-secondary {
+  @include button-outline-variant($buttons-secondary-border);
+}
+.buttons-outline-info {
+  @include button-outline-variant($buttons-info-bg);
+}
+.buttons-outline-success {
+  @include button-outline-variant($buttons-success-bg);
+}
+.buttons-outline-warning {
+  @include button-outline-variant($buttons-warning-bg);
+}
+.buttons-outline-danger {
+  @include button-outline-variant($buttons-danger-bg);
+}
+
+
+//
+// Link buttons
+//
+
+// Make a button look and behave like a link
+.buttons-link {
+  font-weight: $font-weight-normal;
+  color: $link-color;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &.active,
+  &:disabled {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  @include hover {
+    border-color: transparent;
+  }
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+    background-color: transparent;
+  }
+  &:disabled {
+    color: $buttons-link-disabled-color;
+
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+}
+
+
+//
+// Button Sizes
+//
+
+.buttons-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($buttons-padding-y-lg, $buttons-padding-x-lg, $font-size-lg, $buttons-border-radius-lg);
+}
+.buttons-sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size($buttons-padding-y-sm, $buttons-padding-x-sm, $font-size-sm, $buttons-border-radius-sm);
+}
+
+
+//
+// Block button
+//
+
+.buttons-block {
+  display: block;
+  width: 100%;
+}
+
+// Vertically space out multiple block buttons
+.buttons-block + .buttons-block {
+  margin-top: $buttons-block-spacing-y;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.buttons-block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,38 @@
+<section>
+  <h1>Resorts</h1>
+  <hr>
+</section>
+
+  <div class="container">
+    <% if(locals.isAuthenticated) { %>
+    <a href="/resorts/new" class="buttons">Add Resort</a>
+    <% } %>
+    <div id="gallery">
+      <div class="row">
+        <% resorts.forEach((resort) => { %>
+          <div class="col-sm-12 col-md-6 col-lg-4 container">
+            <div>
+              <h3><%= resort.name %></h3>
+                <a href="/resorts/<%= resort.id %>">
+                  <div class="image" style="background-image:url('<%= resort.imageSRC %>')"></div>
+                  </a>
+                  <p class="created"><strong>Created By: </strong><small><%= resort.createdBy.username %></small></p>
+                  <hr>
+                  <p class="caption"><strong>Rating: </strong><%= resort.rating %></p>
+                  <hr>
+            </div>
+              <% if(locals.isAuthenticated && resort.ownedBy(user)) { %>
+                <div>
+                  <a href="/resorts/<%= resort.id %>/edit" class="buttons delete-form">Edit Resort</a>
+                  <form action="/resorts/<%= resort.id %>" method="POST" class="delete-form">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button class="deletebuttons">Delete Resort</button>
+                  </form>
+                  <hr>
+                </div>
+              <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>

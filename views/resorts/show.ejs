@@ -1,0 +1,75 @@
+<section>
+  <h1><%= resort.name %></h1>
+  <hr>
+</section>
+<div class="container">
+  <div>
+    <img src="<%= resort.imageSRC %>" alt="<%= resort.name %>" class="profile">
+    <hr>
+
+    <% if(locals.isAuthenticated && resort.ownedBy(user)) { %>
+      <div>
+        <a href="/resorts/<%= resort.id %>/edit" class="buttons delete-form">Edit Resort</a>
+        <form action="/resorts/<%= resort.id %>" method="POST" class="delete-form">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button class="deletebuttons">Delete Resort</button>
+        </form>
+        <hr>
+      </div>
+    <% } %>
+
+    <h3 class="caption">About</h3>
+    <p><a href="http://<%= resort.website %>" target="_blank"><strong>Resort Website</strong><a/></p>
+    <p><strong>Lifts: </strong><%= resort.lifts %></p>
+    <p><strong>Country: </strong><%= resort.country %></p>
+    <p><strong>City: </strong><%= resort.city %></p>
+    <p><strong>Rating: </strong><%= resort.rating %></p>
+    <strong>Created By: </strong><small><%= resort.createdBy.username %></small>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <h3 class="caption">Weather Conditions</h3>
+  <hr>
+  <img src="/assets/images/logos/wu.png" type"image/png" alt="wu" id="wu">
+  <div id="weather" data-lat="<%= resort.lat %>" data-lng="<%= resort.lng %>"></div>
+</div>
+
+<hr>
+<div class="container">
+  <h3 class="caption">Comments</h3>
+  <hr>
+  <% resort.comments.forEach((comment) => { %>
+    <p><%= comment.content %></p>
+    <small><strong>Created By: </strong><%= comment.createdBy.username %></small>
+
+    <% if(locals.isAuthenticated && comment.ownedBy(user)) { %>
+      <form method="POST" action="/resorts/<%= resort.id %>/comments/<%= comment.id %>" class="delete-form">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="deletebuttons">Delete Comment</button>
+        <hr>
+      </form>
+    <% } %>
+  <% }) %>
+</div>
+
+<hr>
+<div class="container">
+  <% if(locals.isAuthenticated) { %>
+    <form method="POST" action="/resorts/<%= resort.id %>/comments">
+      <textarea name="content" id="content" rows="2" cols="20" class="form-control"></textarea>
+      <button class="deletebuttons submit">Leave a Comment</button>
+    </form>
+  <% } %>
+  <h3 class="caption">Map</h3>
+  <hr>
+  <div id="location">
+    <div class="row">
+      <div class="col-sm-10 offset-sm-1">
+        <div id="map" data-lat=<%= resort.lat %> data-lng=<%= resort.lng %>></div>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>

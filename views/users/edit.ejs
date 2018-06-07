@@ -1,0 +1,38 @@
+<section>
+  <h1><%= user.username %></h1>
+  <hr>
+</section>
+<div class="container">
+  <img src="<%= user.profileImageSRC %>" alt="<%= user.profileImageSRC %>" class="profileImage"><br>
+</div>
+<hr>
+<div class="container">
+  <form method="POST" action="/users/<%= user.id %>">
+    <input type="hidden" name="_method" value="PUT">
+    <div>
+      <label for="firstname">First Name</label>
+      <input type="firstname" name="firstname" id="firstname" value="<%= user.firstname %>" class="form-control">
+    </div>
+    <div>
+      <label for="lastname">Last Name</label>
+      <input type="lastname" name="lastname" id="lastname" value="<%= user.lastname %>" class="form-control">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" value="<%= user.email %>" class="form-control">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" value="<%= user.password %>" class="form-control">
+    </div>
+    <div>
+      <label for="passwordConfirmation">Password Confirmation</label>
+      <input type="password" name="passwordConfirmation" id="passwordConfirmation" value="<%= user.passwordConfirmation %>" class="form-control">
+    </div>
+    <%# <div>
+      <label for="profileImage">Image file</label>
+      <input type="file" name="profileImage" id="profileImage" class="profileImage">
+    </div> %>
+    <button class="deletebuttons">Update Profile</button>
+  </form>
+</div>

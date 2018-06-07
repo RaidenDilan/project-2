@@ -1,0 +1,55 @@
+<section>
+  <h1>REGISTER</h1>
+  <hr>
+</section>
+<div class="container">
+  <form method="POST" action="/register" enctype="multipart/form-data">
+    <div>
+      <label for="firstname">Firstname</label>
+      <input type="text" name="firstname" id="firstname" class="form-control">
+    </div>
+    <div>
+      <label for="lastname">Lastname</label>
+      <input type="text" name="lastname" id="lastname" class="form-control">
+    </div>
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" class="form-control">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" class="form-control">
+    </div>
+    <div>
+      <label for="passwordConfirmation">Password Confirmation</label>
+      <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control">
+    </div>
+    <div>
+      <label for="profileImage">Image</label>
+      <input type="file" name="profileImage" id="image">
+    </div>
+    <button class="deletebuttons">Register</button>
+  </form>
+  <hr>
+</div>
+<div class="container">
+  <div>
+    <h5>Or register with</h5>
+    <a href="<%= oauth.github.getLoginURL() %>"><button class="deletebuttons">Login with GitHub!</button></a>
+    <%# <a href="#"><button class="deletebuttons">Github</button></a>
+    <a href="#"><button class="deletebuttons">Instagram</button></a>
+    <a href="#"><button class="deletebuttons">Facebook</button></a>
+    <a href="#"><button class="deletebuttons">Twitter</button></a> %>
+  </div>
+  <hr>
+</div>
+<div class="container">
+  <div>
+    <label class="terms">Agree to</label>
+    <strong><a href="#" class="terms">Terms &amp; Conditions</a></strong>
+  </div>
+</div>

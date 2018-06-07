@@ -1,0 +1,653 @@
+@import "bootstrap/bootstrap-grid";
+
+.heading-styles {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+$white: #FFF;
+$black: #000;
+$brand: rgb(255, 209, 0);
+
+body {
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  font-family: inherit;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+}
+
+h1 {
+  @extend .heading-styles;
+  margin-bottom: 0;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+
+h2, {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+h3 {
+  @extend .heading-styles;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+header {
+  top: 40px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 0;
+  // background-color: rgba(20, 20, 20, 0);
+  transition: background-color 0.5s ease;
+  &.opaque {
+    // background-color: rgba(20, 20, 20, 0.6);
+  }
+  nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-top: 30px;
+      li {
+        font-size: 15px;
+        display: inline-block;
+        margin-left: 20px;
+        line-height: 40px;
+        &:last-of-type {
+        }
+        &.menu {
+          color: $black;
+          cursor: pointer;
+          display: none;
+          font-size: 20px;
+        }
+        a {
+          color: $white;
+          @extend .heading-styles;
+          font-weight: 600;
+          position: relative;
+          &:after {
+            content: "";
+            height: 2px;
+            width: 100%;
+            background-color: $white;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+          }
+          &:hover {
+            margin-top: 10px;
+            text-decoration: none;
+            color: $white;
+            &:after {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+section {
+  text-align: center;
+  padding-top: 80px;
+  position: relative;
+  &:last-of-type {
+    border-bottom: 0;
+  }
+  h2 {
+    font-size: 28px;
+  }
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 0;
+  a {
+    color: $black;
+    @extend .heading-styles;
+    font-weight: none;
+    font-size: 15px;
+    position: relative;
+    text-decoration: none;
+    &:after {
+      content: "";
+      height: 2px;
+      width: 100%;
+      background-color: $black;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      text-decoration: none;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $black;
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+button:focus {
+  outline: none;
+}
+
+img {
+  max-width: 25%;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  text-align: center;
+  // border: 2px solid black;
+}
+
+div.info {
+  h5 {
+    text-align: center;
+    padding-top: 80px;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+}
+
+div.alert {
+  h5 {
+    text-align: center;
+    margin-left: 25px;
+    padding-top: 80px;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.40);
+  padding: 1px 0;
+  text-align: center;
+  // padding-right: 200px;
+  p {
+  font-weight: 500;
+  font-size: 12px;
+  top: 5px;
+  color: $white;
+  padding: 10px 0;
+  }
+}
+
+.dropdown {
+  background-color: rgba(0, 0, 0, 0.40);
+}
+
+.right {
+  float: right;
+}
+
+.logo {
+  width: 20px;
+  padding-top: 10px;
+  margin-left: 15px;
+  float: left;
+}
+
+.logo1 {
+  padding: 10px 20px 0 0;
+  float: right;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.profileImage {
+  border-radius: 25px;
+}
+
+.caption {
+  color: $white;
+  background-color: $black;
+  opacity: 0.2;
+  transition: opacity 0.6s ease;
+}
+
+.creater {
+  font-size: 20px;
+}
+
+.createrImage {
+  border: 2px solid black;
+}
+
+.contact {
+  color: $white;
+  background-color: $black;
+  opacity: 0.4;
+  transition: opacity 0.6s ease;
+}
+
+.feed {
+  padding: 10px;
+  color: $white;
+  background-color: rgba(0, 0, 0, 0.40);
+}
+
+.filename {
+  width: 30%;
+}
+
+.created {
+  padding: 5px;
+  color: $white;
+  background-color: $black;
+  opacity: 0.4;
+  transition: opacity 0.6s ease;
+}
+
+.container {
+  text-align: center;
+  h5 {
+    margin-bottom: 15px;
+  }
+}
+
+.delete-form {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.deletebuttons {
+  line-height: 0.25;
+  display: inline-block;
+  text-align: center;
+  padding: 15px;
+  background-color: $brand;
+  color: $black;
+  outline: none;
+  border: none;
+  &:hover {
+    background-color: $black;
+    text-decoration: none;
+    color: $white;
+    transition: background-color 0.9s ease;
+    outline: none;
+  }
+}
+
+.submit {
+  line-height: 0.25;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+  text-align: center;
+  padding: 15px;
+  background-color: $brand;
+  color: $black;
+  outline: none;
+  border: none;
+  &:hover {
+    background-color: $black;
+    color: $white;
+    transition: background-color 0.9s ease;
+  }
+}
+
+.buttons {
+  line-height: 0.25;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+  text-align: center;
+  padding: 15px;
+  background-color: $brand;
+  color: $black;
+  font-weight: 500;
+  outline: none;
+  &:hover {
+    background-color: $black;
+    color: $white;
+    transition: background-color 0.9s ease;
+    text-decoration: none;
+  }
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.video-wrapper {
+  position: fixed;
+  z-index: -100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.profile {
+  max-width: 70%;
+}
+
+.404 {
+  max-width: 10%;
+}
+
+.contacts {
+  width: 50px;
+}
+
+small {
+  display: inherit;
+}
+
+#wu {
+  max-width: 10%;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+#map {
+  height: 600px;
+  background-color: $black;
+}
+
+#logo {
+  color: $black;
+  @extend .heading-styles;
+  font-weight: bold;
+  position: relative;
+  text-decoration: none;
+}
+
+#gallery {
+  .image {
+    background-position: center;
+    background-size: cover;
+    &:after {
+      content: "";
+      padding-bottom: 66.66%;
+      display: block;
+    }
+  }
+}
+
+#homepage {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  transform: translate(-10%, -10%);
+  zoom: 83%;
+}
+
+#home {
+  position: absolute;
+  color: $white;
+  margin-left: 45%;
+}
+
+.accountButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  a {
+    margin: 0 10px;
+  }
+  button {
+    margin: 0 10px;
+  }
+}
+
+.feedImages {
+  width: 30%;
+  margin: 0 auto;
+  button.buttons {
+    width: 100%;
+  }
+}
+.modal-header {
+  small {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+.modal-body {
+  .caption {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  button.buttons {
+    width: 100%;
+    line-height: .25;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    text-align: center;
+    padding: 15px;
+    background-color: #ffd100;
+    color: #000;
+    font-weight: 500;
+    outline: 0;
+  }
+}
+.modal-footer {
+  button {
+    width: 100%;
+  }
+}
+
+// IPHONE 5
+@media only screen and (min-width: 320px) and (max-width: 568px) {
+  header {
+    height: auto;
+    nav {
+      ul {
+        padding-top: 7px;
+        li {
+          display: block;
+          float: none;
+          text-align: right;
+          &.menu {
+            display: block;
+            font-size: 40px;
+          }
+          a {
+            right: 10px;
+          }
+        }
+        .dropdown {
+          display: none;
+        }
+      }
+    }
+  }
+  footer {
+    padding: 5px;
+    p {
+      font-size: 8px;
+      padding: 5px;
+    }
+    .logo {
+      width: 20px;
+      padding-top: 5px;
+      margin-left: 0;
+      float: none;
+    }
+    .logo1 {
+      padding-top: 5px;
+      padding-right: 0;
+      float: none;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+  #wu {
+    max-width: 40%;
+  }
+  p {
+    a {
+      font-size: 12px;
+    }
+  }
+  img {
+    max-width: 70%;
+  }
+  section {
+    padding-top: 10px;
+  }
+  div.info h5 {
+    padding-top: 0;
+    font-size: 15px;
+  }
+  div.alert {
+    h5 {
+      font-size: 15px;
+      padding: 0;
+    }
+  }
+  .success h5 {
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+  }
+  .feed {
+    font-size: 15px;
+  }
+  .profile {
+    max-width: 90%;
+  }
+  .terms {
+    font-size: 10px;
+  }
+  .underconstruction {
+    margin: 140px 0;
+  }
+  .buttons {
+    margin: 0;
+    font-size: 12px;
+    padding: 12px;
+  }
+  .deletebuttons {
+    font-size: 12px;
+    padding: 12px;
+  }
+  .contact {
+    font-size: 10px;
+  }
+  #homepage {
+    transform: translate(-35%,-10%);
+    zoom: 59%;
+  }
+  #map {
+    height: 300px;
+  }
+}
+
+// IPHONE 6
+@media only screen and (min-width : 375px) and (max-width : 667px) {
+  header {
+    height: auto;
+    nav {
+      ul {
+        padding-top: 15px;
+        padding-right: 7px;
+        li {
+          display: block;
+          float: none;
+          text-align: right;
+          &.menu {
+            display: block;
+            font-size: 40px;
+          }
+          a {
+            right: 10px;
+          }
+        }
+        .dropdown {
+          display: none;
+        }
+      }
+    }
+  }
+  img {
+    max-width: 80%;
+  }
+  .profile {
+    max-width: 90%;
+  }
+  #homepage {
+    transform: translate(-35%,-10%);
+    zoom: 69%;
+  }
+}
+
+// RECENT IPADS
+@media only screen and (min-width : 768px) and (max-width : 1024px)  {
+  img {
+    max-width: 50%;
+  }
+  footer {
+    padding: 0;
+    opacity: 0.2;
+    transition: opacity 0.6s ease;
+    p {
+      font-size: 15px;
+    }
+    .logo {
+      margin: 0;
+      display: inline;
+      max-width: 30px;
+      padding-top: 8px;
+      float: none;
+    }
+  }
+  .profile {
+    max-width: 100%;
+  }
+  #homepage {
+    transform: translate(-25%,0%);
+    zoom: 95%;
+  }
+  #wu {
+    max-width: 20%;
+  }
+}
