@@ -17,7 +17,8 @@ User
     username: 'raidendilan',
     email: 'raiden18@me.com',
     password: 'password',
-    passwordConfirmation: 'password'
+    passwordConfirmation: 'password',
+    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
   }, {
     firstname: 'Luca',
     lastname: 'Ancelotti',

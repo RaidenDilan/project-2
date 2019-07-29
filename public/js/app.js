@@ -26,6 +26,8 @@ $(function () {
     });
   });
 
+  // $('#myModal').on('shown.bs.modal', () => $('#myInput').trigger('focus'));
+
   function resortWeather() {
     var lat = $weather.data('lat');
     var lng = $weather.data('lng');

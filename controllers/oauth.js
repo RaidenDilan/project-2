@@ -19,20 +19,14 @@ function github(req, res, next) {
       url: oauth.github.profileURL,
       qs: token,
       json: true,
-      headers: {
-        'User-Agent': 'Request-Promise'
-      }
+      headers: { 'User-Agent': 'Request-Promise' }
     });
   })
   .then((profile) => {
-    return User.findOne({ $or: [{ email: profile.email }, { githubId: profile.id }] })
+    return User
+      .findOne({ $or: [{ email: profile.email }, { githubId: profile.id }] })
       .then((user) => {
-        if(!user) {
-          user = new User({
-            username: profile.login,
-            email: profile.email
-          });
-        }
+        if(!user) user = new User({ username: profile.login, email: profile.email });
 
         user.githubId = profile.id;
         user.profileImage = profile.avatar_url;

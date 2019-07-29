@@ -22,6 +22,8 @@ $(() => {
     transition: 'transform 250ms linear, opacity 250ms linear'
   }));
 
+  // $('#myModal').on('shown.bs.modal', () => $('#myInput').trigger('focus'));
+
   function resortWeather() {
     const lat = $weather.data('lat');
     const lng = $weather.data('lng');

@@ -2,7 +2,7 @@ const rp              = require('request-promise');
 const { openWeather } = require('../config/environment.js');
 
 function getWeather(req, res) {
-  let baseUrl = `http://api.openweathermap.org/data/2.5`;
+  const baseUrl = `http://api.openweathermap.org/data/2.5`;
   let lat = req.query.lat;
   let lng = req.query.lng;
 

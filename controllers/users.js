@@ -9,7 +9,7 @@ function showRoute(req, res, next) {
     .exec()
     .then((user) => {
       if(!user) return res.notFound();
-      else if (user) return res.render('users/show', { user }); // providing { user } as params
+      else if (user) return res.render('users/show', { user });
     })
     .catch(next);
 }

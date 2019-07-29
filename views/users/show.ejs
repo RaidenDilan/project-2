@@ -5,8 +5,8 @@
 
 <div class="container">
   <img src="<%= user.profileImageSRC %>" alt="<%= user.username %>" class="profileImage"><br>
-  <h5 style="padding: 15px 0 0 0; font-size: 15px;"><strong>Fullname:</strong> <%= user.firstname + user.lastname %></h5>
-  <h5 style="font-size: 15px;"><strong>Email:</strong> <%= user.email%></h5>
+  <h5 class="fullname"><strong>Fullname:</strong> <%= user.firstname + ' ' + user.lastname %></h5>
+  <h5 class="email"><strong>Email:</strong> <%= user.email%></h5>
   <hr>
   <div class="accountButtons">
     <% if(locals.isAuthenticated && (user.id == user.id)) { %>
@@ -24,7 +24,7 @@
 <div class="container">
   <h2> Gallery</h2>
   <hr>
-  
+
   <div class="row">
     <div class="col-md-12">
       <% if(locals.isAuthenticated && (user.id == user.id)) { %>
@@ -43,7 +43,7 @@
             <textarea name="caption" id="caption" class="form-control"></textarea>
           </div>
 
-          <button class="buttons">Add</button>
+          <button class="buttons">Upload</button>
 
         </form>
 
@@ -54,7 +54,12 @@
       <div class="row">
         <% user.images.forEach((image) => { %>
           <div class="col-lg-4 col-md-4 col-sm-6">
-            <img src="<%= image.src %>" alt="<%= image.caption %>" class="img-fluid img-thumbnail" data-toggle="modal" data-target="#<%=image.id%>">
+            <img
+              src="<%= image.src %>" alt="<%= image.caption %>"
+              class="img-fluid img-thumbnail"
+              id="userFeedImage"
+              data-toggle="modal"
+              data-target="#<%= image.id %>">
           </div>
 
           <div class="modal fade" id="<%=image.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -68,16 +73,16 @@
                 <div class="modal-body">
                   <img src="<%= image.src %>" alt="<%= image.caption %>" class="img-fluid">
                   <p class="caption">Caption: <%= image.caption %></p>
-                  <% if(locals.isAuthenticated && (user.id == user.id)) { %>
-                    <form method="POST" action="/users/<%=user.id%>/images/<%=image.id%>">
-                      <input type="hidden" name="_method" value="DELETE">
-                      <button class="buttons">Delete</button>
-                    </form>
-                  <% } %>
                 </div>
 
                 <div class="modal-footer">
-                  <button type="button" class="buttons" data-dismiss="modal">Close</button>
+                  <% if(locals.isAuthenticated && (user.id == user.id)) { %>
+                    <form method="POST" action="/users/<%=user.id%>/images/<%=image.id%>">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button class="btn-danger">Delete</button>
+                    </form>
+                  <% } %>
+                  <button type="button" data-dismiss="modal" class="btn-primary">Close</button>
                 </div>
 
               </div>
