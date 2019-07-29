@@ -47,7 +47,7 @@
     <% if(locals.isAuthenticated && comment.ownedBy(user)) { %>
       <form method="POST" action="/resorts/<%= resort.id %>/comments/<%= comment.id %>" class="delete-form">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="deletebuttons">Delete Comment</button>
+        <button class="buttons">Delete Comment</button>
         <hr>
       </form>
     <% } %>

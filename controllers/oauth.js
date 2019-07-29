@@ -1,6 +1,6 @@
-const rp      = require('request-promise');
-const oauth   = require('../config/oauth');
-const User    = require('../models/user');
+const rp    = require('request-promise');
+const oauth = require('../config/oauth');
+const User  = require('../models/user');
 
 function github(req, res, next) {
   return rp({
@@ -26,7 +26,6 @@ function github(req, res, next) {
     return User
       .findOne({ $or: [{ email: profile.email }, { githubId: profile.id }] })
       .then((user) => {
-        console.log('user =-=-=-=-=-)))', user);
         if(!user) user = new User({ username: profile.login, email: profile.email });
 
         user.githubId = profile.id;
@@ -35,7 +34,6 @@ function github(req, res, next) {
       });
   })
   .then((user) => {
-    console.log('user =-=-=-=-=-)))=-=-=-=-', user);
     req.session.userId = user.id;
     req.session.isAuthenticated = true;
 

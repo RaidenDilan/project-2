@@ -352,23 +352,23 @@ footer {
   text-decoration: none;
 }
 
-.deletebuttons {
-  line-height: 0.25;
-  display: inline-block;
-  text-align: center;
-  padding: 15px;
-  // background-color: $brand;
-  color: $black;
-  outline: none;
-  border: none;
-  &:hover {
-    background-color: $black;
-    text-decoration: none;
-    color: $white;
-    transition: background-color 0.9s ease;
-    outline: none;
-  }
-}
+// .deletebuttons {
+//   line-height: 0.25;
+//   display: inline-block;
+//   text-align: center;
+//   padding: 15px;
+//   // background-color: $brand;
+//   color: $black;
+//   outline: none;
+//   border: none;
+//   &:hover {
+//     background-color: $black;
+//     text-decoration: none;
+//     color: $white;
+//     transition: background-color 0.9s ease;
+//     outline: none;
+//   }
+// }
 
 .submit {
   line-height: 0.25;
@@ -486,37 +486,37 @@ footer {
 //   color: #39D2B4;
 // }
 
-.custom-file-input {
-  color: transparent;
-}
-.custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
-}
-.custom-file-input::before {
-  content: 'Select a file';
-  color: #000000;
-  display: inline-block;
-  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #ffffff;
-  font-weight: 700;
-  font-size: 15px;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active {
-  outline: 0;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
+// .custom-file-input {
+//   color: transparent;
+// }
+// .custom-file-input::-webkit-file-upload-button {
+//   visibility: hidden;
+// }
+// .custom-file-input::before {
+//   content: 'Select a file';
+//   color: #000000;
+//   display: inline-block;
+//   background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+//   border: 1px solid #999999;
+//   border-radius: 3px;
+//   padding: 5px 8px;
+//   outline: none;
+//   white-space: nowrap;
+//   -webkit-user-select: none;
+//   cursor: pointer;
+//   text-shadow: 1px 1px #ffffff;
+//   font-weight: 700;
+//   font-size: 15px;
+// }
+// .custom-file-input:hover::before {
+//   border-color: black;
+// }
+// .custom-file-input:active {
+//   outline: 0;
+// }
+// .custom-file-input:active::before {
+//   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+// }
 
 
 small {
@@ -779,10 +779,10 @@ small {
     font-size: 12px;
     padding: 12px;
   }
-  .deletebuttons {
-    font-size: 12px;
-    padding: 12px;
-  }
+  // .deletebuttons {
+  //   font-size: 12px;
+  //   padding: 12px;
+  // }
   .contact {
     font-size: 10px;
   }
