@@ -1,13 +1,11 @@
-const mongoose    = require('mongoose');
-const { dbURI }   = require('../config/environment');
+const mongoose   = require('mongoose');
+const { dbURI }  = require('../config/environment');
 
-mongoose.Promise  = require('bluebird');
-mongoose.connect(dbURI, {
-  useMongoClient: true
-});
+mongoose.Promise = require('bluebird');
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
 const Resort = require('../models/resort');
-const User = require('../models/user');
+const User   = require('../models/user');
 
 Resort.collection.drop();
 User.collection.drop();
@@ -20,7 +18,22 @@ User
     email: 'raiden18@me.com',
     password: 'password',
     passwordConfirmation: 'password'
-    // profileImage: 'http://icon-icons.com/icons2/510/PNG/512/ios7-contact_icon-icons.com_50286.png'
+  }, {
+    firstname: 'Luca',
+    lastname: 'Ancelotti',
+    username: 'lucaancelotti',
+    email: 'luca@me.com',
+    password: 'password',
+    passwordConfirmation: 'password',
+    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+  }, {
+    firstname: 'Rawand',
+    lastname: 'Dilan',
+    username: 'rawanddilan',
+    email: 'rawand@me.com',
+    password: 'password',
+    passwordConfirmation: 'password',
+    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
   }])
   .then((users) => {
     console.log(`${users.length} User(s) created`);
@@ -37,8 +50,20 @@ User
         createdBy: users[0],
         comment: [ 'Awesome place' ],
         image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Verbier%2C_Switzerland%2C_in_2011.jpg'
+      }, {
+        name: 'La Plagne',
+        website: 'https://www.la-plagne.com/',
+        country: 'France',
+        city: 'La Plagne',
+        lifts: '20',
+        rating: 3,
+        lat: '45.5224382',
+        lng: '6.6572824',
+        createdBy: users[1],
+        comment: [ 'Looks Dope!' ],
+        image: 'https://img5.onthesnow.com/image/xl/76/76654.jpg'
       }]);
   })
   .then((resorts) => console.log(`${resorts.length} Resort(s) created`))
-  .catch((err) => console.log('err --->', err))
+  .catch((err) => console.log('DB err --->', err))
   .finally(() => mongoose.connection.close());

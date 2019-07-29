@@ -81,7 +81,7 @@ function updateRoute(req, res, next) {
     .then(() => res.redirect(`/resorts/${req.params.id}`))
     .catch((err) => {
       if(err.name === 'ValidationError') return res.badRequest(`/resorts/${req.params.id}/edit`, err.toString());
-      next(err);
+      return next(err);
     });
 }
 

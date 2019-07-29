@@ -1,5 +1,5 @@
-const User    = require('../models/user');
-const oauth   = require('../config/oauth');
+const User  = require('../models/user');
+const oauth = require('../config/oauth');
 
 function newRoute(req, res) {
   res.render('registrations/new', { oauth });
@@ -7,7 +7,6 @@ function newRoute(req, res) {
 
 function createRoute(req, res, next) {
   if (req.file) req.body.profileImage = req.file.key;
-  console.log('CREATE ROUTE - req.file --->', req.file);
 
   User
     .create(req.body)
@@ -16,17 +15,14 @@ function createRoute(req, res, next) {
       if (err.name === 'ValidationError') {
         req.flash('alert', 'Passwords do not match');
         return res.badRequest('/register', err.toString());
-      }
-      next(err);
+      } else return next(err);
     });
 }
 
 function deleteRoute(req, res, next) {
   req.user
     .remove()
-    .then(() => {
-      req.session.regenerate(() => res.unauthorized('/', 'Your account has been deleted'));
-    })
+    .then(() => req.session.regenerate(() => res.unauthorized('/', 'Your account has been deleted')))
     .catch(next);
 }
 

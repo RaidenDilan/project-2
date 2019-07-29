@@ -24,6 +24,36 @@ $(function () {
     });
   });
 
+  // // PREPARE FORM DATA
+  //   var formData = {
+  //     cityname: $('#cityname').val()
+  //     // lastname: $("#lastname").val()
+  //   };
+  //
+  // // DO POST
+  // $.ajax({
+  //   type: 'POST',
+  //   contentType: 'application/json',
+  //   url: window.location + 'api/resorts/:id',
+  //   data: JSON.stringify(formData),
+  //   dataType: 'json',
+  //   success: (output) => {
+  //     console.log('output', output);
+  //     // $('#postResultDiv').html(
+  //     //   '<p>' +
+  //     //     '<br>' +
+  //     //     //.replace(/\"([^"]+)\":/g, "$1:")
+  //     //     '' +
+  //     //     JSON.stringify(`<code> ${output.addname} </code> Current Tempeature is <code>${output.temp}<sup>o</sup>C </code>`) +
+  //     //     '</p>'
+  //     // );
+  //   },
+  //   error: (e) => {
+  //     alert('Error!');
+  //     console.log('ERROR: ', e);
+  //   }
+  // });
+
   function resortWeather() {
     var lat = $weather.data('lat');
     var lng = $weather.data('lng');

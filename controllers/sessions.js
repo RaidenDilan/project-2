@@ -11,8 +11,7 @@ function sessionsCreate(req, res, next) {
     .then((user) => {
       if(!user || !user.validatePassword(req.body.password)) {
         req.flash('error', 'Unknown email/password combination');
-        return res.redirect('/login');
-        // return res.unauthorized('/login', 'Unknown credentials');
+        return res.redirect('/login'); // return res.unauthorized('/login', 'Unknown credentials');
       }
 
       req.session.userId = user.id;
@@ -20,8 +19,7 @@ function sessionsCreate(req, res, next) {
       req.user = user;
 
       req.flash('success', `Welcome back, ${user.username}!`);
-      // res.redirect(`/users/${user.id}`);
-      res.redirect(`/resorts`);
+      res.redirect(`/resorts`); // res.redirect(`/users/${user.id}`);
     })
     .catch(next);
 }
