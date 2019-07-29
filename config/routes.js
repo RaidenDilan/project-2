@@ -5,9 +5,21 @@ const secureRoute   = require('../lib/secureRoute');
 const resorts       = require('../controllers/resorts');
 const upload        = require('../lib/upload');
 const users         = require('../controllers/users');
+const weather       = require('../controllers/weather');
+// const google        = require('../controllers/geocode');
 const oauth         = require('../controllers/oauth');
 
 router.get('/', (req, res) => res.render('statics/index'));
+
+// -------------------------- OPEN WEATHER API ------------------------------ //
+
+router.route('/weather')
+  .get(weather.getWeather);
+
+// -------------------------- OPEN WEATHER API ------------------------------ //
+
+// router.route('/geocode')
+  // .get(google.getGeocode);
 
 // -------------------------------- USER ------------------------------------ //
 

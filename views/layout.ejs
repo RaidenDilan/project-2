@@ -10,14 +10,16 @@
   </head>
   <body class="site">
     <% include ./partials/navbar %>
-    <% for(const type in messages) { %>
-      <div class="<%= type %>">
-        <div>
-          <h5><%= messages[type] %></h5>
+    <div class="flash-messages">
+      <% for(const type in messages) { %>
+        <div class="<%= type %>">
+          <div>
+            <h5><%= messages[type] %></h5>
+          </div>
+          <button type="button" name="button" class="close-message"></button>
         </div>
-        <button type="button" name="button" class="close-message"></button>
-      </div>
-    <% } %>
+      <% } %>
+    </div>
     <main class="site-content">
       <%- body %>
     </main>

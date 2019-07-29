@@ -1,64 +1,32 @@
 // var resort = resort || {};
 
 $(() => {
-  var $links = $('nav a');
-  var $menu = $('.menu');
-  var $map = $('#map');
-  var $input = $('.autocomplete');
-  var $weather = $('#weather'); // var weather = $('#weather').data('resort');
-  var successMessage = $('.success');
+  var $links          = $('nav a');
+  var $menu           = $('.menu');
+  var $map            = $('#map');
+  var $input          = $('.autocomplete');
+  var $weather        = $('#weather'); // var weather = $('#weather').data('resort');
+  var successMessage  = $('.flash-messages');
   var closeMessageBtn = $('.close-message');
-  let map = null;
-  let infowindow = null;
+  let map             = null;
+  let infowindow      = null;
 
-  if ($map.length) initMap();
-  if ($input.length ) resortAutocomplete();
-  if ($weather.length) resortWeather();
-  if ($links.length) $links.on('click');
-  if ($menu.length) $menu.on('click', toggleMenu);
+  if ($map.length !== 0) initMap();
+  if ($input.length !== 0 ) resortAutocomplete();
+  if ($weather.length !== 0) resortWeather();
+  if ($links.length !== 0) $links.on('click');
+  if ($menu.length !== 0) $menu.on('click', toggleMenu);
   if (closeMessageBtn.length) closeMessageBtn.on('click', () => successMessage.css({
-    opacity: '0', transform: 'translateY(-26px)', transition: 'transform 250ms linear, opacity 250ms linear'
+    opacity: '0',
+    transform: 'translateY(-26px)',
+    transition: 'transform 250ms linear, opacity 250ms linear'
   }));
-
-  // // PREPARE FORM DATA
-  //   var formData = {
-  //     cityname: $('#cityname').val()
-  //     // lastname: $("#lastname").val()
-  //   };
-  //
-  // // DO POST
-  // $.ajax({
-  //   type: 'POST',
-  //   contentType: 'application/json',
-  //   url: window.location + 'api/resorts/:id',
-  //   data: JSON.stringify(formData),
-  //   dataType: 'json',
-  //   success: (output) => {
-  //     console.log('output', output);
-  //     // $('#postResultDiv').html(
-  //     //   '<p>' +
-  //     //     '<br>' +
-  //     //     //.replace(/\"([^"]+)\":/g, "$1:")
-  //     //     '' +
-  //     //     JSON.stringify(`<code> ${output.addname} </code> Current Tempeature is <code>${output.temp}<sup>o</sup>C </code>`) +
-  //     //     '</p>'
-  //     // );
-  //   },
-  //   error: (e) => {
-  //     alert('Error!');
-  //     console.log('ERROR: ', e);
-  //   }
-  // });
 
   function resortWeather() {
     const lat = $weather.data('lat');
     const lng = $weather.data('lng');
 
-    // const apiKey = process.env.OPENWEATHER_API_KEY;
-    let baseUrl = `http://api.openweathermap.org/data/2.5`;
-
-    // $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/${lat},${lng}.json`)
-    $.get(`${baseUrl}/weather?lat=${lat}&lon=${lng}&units=metric&appid=${apiKey}`)
+    $.get('/weather', { lat, lng })
       .done((response) => {
         if (response.hasOwnProperty(response.weather[0].description) !== null || undefined) $weather.append(`<p><strong>Cloudiness:</strong> ${response.weather[0].description}</p>`);
         if (response.hasOwnProperty(response.main.temp) !== null || undefined) $weather.append(`<p><strong>Temperature:</strong> ${response.main.temp}°C</p>`);
@@ -84,10 +52,6 @@ $(() => {
       $lat.val(location.lat);
       $lng.val(location.lng);
     });
-  }
-
-  function toggleMenu() {
-    $('.dropdown').slideToggle();
   }
 
   function initMap() {
@@ -132,5 +96,9 @@ $(() => {
     });
 
     infowindow.open(map, marker);
+  }
+
+  function toggleMenu() {
+    $('.dropdown').slideToggle();
   }
 });

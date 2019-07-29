@@ -1,6 +1,4 @@
 const Resort = require('../models/resort');
-const rp = require('request-promise');
-const { apiKey } = require('../config/environment.js');
 
 function indexRoute(req, res, next) {
   Resort
@@ -31,6 +29,8 @@ function createRoute(req, res, next) {
 }
 
 function showRoute(req, res, next) {
+  let baseUrl = `http://api.openweathermap.org/data/2.5`;
+
   Resort
     .findById(req.params.id)
     .populate('createdBy comments.createdBy')
@@ -128,14 +128,6 @@ function deleteCommentRoute(req, res, next) {
   .catch(next);
 }
 
-function aboutRoute(req, res, next) {
-  Resort
-    .find()
-    .exec()
-    .then(() => res.render('resorts/about'))
-    .catch(next);
-}
-
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -145,6 +137,5 @@ module.exports = {
   update: updateRoute,
   delete: deleteRoute,
   createComment: createCommentRoute,
-  deleteComment: deleteCommentRoute,
-  about: aboutRoute
+  deleteComment: deleteCommentRoute
 };
