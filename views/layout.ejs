@@ -12,7 +12,10 @@
     <% include ./partials/navbar %>
     <% for(const type in messages) { %>
       <div class="<%= type %>">
-        <h5><%= messages[type] %></h5>
+        <div>
+          <h5><%= messages[type] %></h5>
+        </div>
+        <button type="button" name="button" class="close-message"></button>
       </div>
     <% } %>
     <main class="site-content">

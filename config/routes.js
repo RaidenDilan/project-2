@@ -9,22 +9,17 @@ const oauth         = require('../controllers/oauth');
 
 router.get('/', (req, res) => res.render('statics/index'));
 
-// ------------------------------- WEATHER ---------------------------------- //
-
-router.route('/weather')
-  .get(secureRoute, users.weather);
-
 // -------------------------------- USER ------------------------------------ //
 
 router.route('/users/:id')
   .get(secureRoute, users.show)
-  .put(upload.single('profileImage'), users.update);
+  .post(upload.single('profileImage'), users.update);
 
 router.route('/users/:id/edit')
   .get(secureRoute, users.edit);
 
 router.route('/users/:id/images')
-  .post(secureRoute, upload.single('userPicture'), users.createImage);
+  .post(secureRoute, upload.single('userFeed'), users.createImage);
 
 router.route('/users/:id/images/:imageId')
   .delete(secureRoute, users.deleteImage);

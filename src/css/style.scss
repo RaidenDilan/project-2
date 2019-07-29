@@ -1,20 +1,82 @@
-@import "bootstrap/bootstrap-grid";
+@import 'bootstrap/bootstrap-grid';
 
 .heading-styles {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-$white: #FFF;
-$black: #000;
+$white: #FFFFFF;
+$black: #000000;
 $brand: rgb(255, 209, 0);
 
 body {
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir Next', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 * {
   font-family: inherit;
+}
+
+.success {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  position: absolute;
+  top: -26px;
+  left: 0;
+  background-color: #000000;
+  color: #FFFFFF;
+  margin: 0;
+  opacity: 0;
+  animation: slide 500ms forwards;
+  animation-delay: 500ms;
+  -webkit-animation: slide-message 500ms forwards;
+  -webkit-animation-delay: 500ms;
+  z-index: 99999;
+
+  div {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    h5 {
+      text-align: center;
+      margin: 0;
+      padding: 5px 0;
+      font-size: 14px;
+    }
+  }
+
+  button.close-message {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    width: 2%;
+    height: 26px;
+    padding: 0;
+    margin: 0 2rem 0 0;
+    position: relative;
+    opacity: 0.5;
+    z-index: 99999;
+
+    &:hover {
+      opacity: 1;
+    }
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      // left: 15px;
+      height: 15px;
+      width: 2px;
+      background-color: #FFFFFF;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 a {
@@ -81,7 +143,7 @@ header {
           font-weight: 600;
           position: relative;
           &:after {
-            content: "";
+            content: '';
             height: 2px;
             width: 100%;
             background-color: $white;
@@ -132,7 +194,7 @@ p {
     position: relative;
     text-decoration: none;
     &:after {
-      content: "";
+      content: '';
       height: 2px;
       width: 100%;
       background-color: $black;
@@ -397,7 +459,7 @@ small {
     background-position: center;
     background-size: cover;
     &:after {
-      content: "";
+      content: '';
       padding-bottom: 66.66%;
       display: block;
     }
@@ -464,7 +526,7 @@ small {
     text-align: center;
     padding: 15px;
     background-color: #ffd100;
-    color: #000;
+    color: #000000;
     font-weight: 500;
     outline: 0;
   }
@@ -621,7 +683,7 @@ small {
 }
 
 // RECENT IPADS
-@media only screen and (min-width : 768px) and (max-width : 1024px)  {
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
   img {
     max-width: 50%;
   }
@@ -649,5 +711,12 @@ small {
   }
   #wu {
     max-width: 20%;
+  }
+}
+
+@keyframes slide-message {
+  100% {
+    opacity: 1;
+    top: 0;
   }
 }

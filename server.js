@@ -1,21 +1,28 @@
 // require our modules
-const express                             = require('express');
-const expressLayouts                      = require('express-ejs-layouts');
-const morgan                              = require('morgan');
-const mongoose                            = require('mongoose');
-mongoose.Promise                          = require('bluebird');
-const session                             = require('express-session');
-const flash                               = require('express-flash');
-const bodyParser                          = require('body-parser');
-const methodOverride                      = require('method-override');
+const express         = require('express');
+const expressLayouts  = require('express-ejs-layouts');
+const morgan          = require('morgan');
+const mongoose        = require('mongoose');
+mongoose.Promise      = require('bluebird');
+const session         = require('express-session');
+const flash           = require('express-flash');
+const bodyParser      = require('body-parser');
+const methodOverride  = require('method-override');
 const { port, env, dbURI, sessionSecret } = require('./config/environment');
-const errorHandler                        = require('./lib/errorHandler');
-const routes                              = require('./config/routes');
-const customResponses                     = require('./lib/customResponses');
-const authentication                      = require('./lib/authentication');
+const errorHandler    = require('./lib/errorHandler');
+const routes          = require('./config/routes');
+const customResponses = require('./lib/customResponses');
+const authentication  = require('./lib/authentication');
+
+// const cors            = require('cors');
 
 // create an express app
 const app = express();
+
+// app.options('/resorts/:id', cors());
+// app.use(cors({
+//   origin: 'http://localhost:3000'
+// }));
 
 // set up out template engine
 app.set('view engine', 'ejs');
@@ -26,7 +33,7 @@ app.use(expressLayouts);
 app.use(express.static(`${__dirname}/public`));
 
 // connect to our database
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, { useMongoClient: true });
 
 // set up middleware
 if(env !== 'test') app.use(morgan('dev'));
@@ -56,6 +63,12 @@ app.use(customResponses);
 
 // set up authentication middleware - requires flash
 app.use(authentication);
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:3000/'); // update to match the domain you will make the request from
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 // set up our routes - just BEFORE our error handler
 app.use(routes);

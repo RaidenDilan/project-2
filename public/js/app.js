@@ -1,37 +1,52 @@
 'use strict';
 
-// 'use strict';
-/* global google:ignore mapStyles :ignore */
+// var resort = resort || {};
 
 $(function () {
-  // var $header = $('header');
-  // var $window = $(window);
   var $links = $('nav a');
   var $menu = $('.menu');
-  // initMap();
+  var $map = $('#map');
+  var $input = $('.autocomplete');
+  var $weather = $('#weather'); // var weather = $('#weather').data('resort');
+  var successMessage = $('.success');
+  var closeMessageBtn = $('.close-message');
+  var map = null;
+  var infowindow = null;
 
-  // $window.scroll(updateHeader).trigger('scroll');
-  $links.on('click');
-  $menu.on('click', toggleMenu);
+  if ($map.length) initMap();
+  if ($input.length) resortAutocomplete();
+  if ($weather.length) resortWeather();
+  if ($links.length) $links.on('click');
+  if ($menu.length) $menu.on('click', toggleMenu);
+  if (closeMessageBtn.length) closeMessageBtn.on('click', function () {
+    return successMessage.css({
+      opacity: '0', transform: 'translateY(-26px)', transition: 'transform 250ms linear, opacity 250ms linear'
+    });
+  });
 
-  function toggleMenu() {
-    $('.dropdown').slideToggle();
+  function resortWeather() {
+    var lat = $weather.data('lat');
+    var lng = $weather.data('lng');
+
+    // const apiKey = process.env.OPENWEATHER_API_KEY;
+    var apiKey = 'c0aaf890acd712dca9aeaac226d30652';
+    var baseUrl = 'http://api.openweathermap.org/data/2.5';
+
+    // $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/${lat},${lng}.json`)
+    $.get(baseUrl + '/weather?lat=' + lat + '&lon=' + lng + '&units=metric&appid=' + apiKey).done(function (response) {
+      if (response.hasOwnProperty(response.weather[0].description) !== null || undefined) $weather.append('<p><strong>Cloudiness:</strong> ' + response.weather[0].description + '</p>');
+      if (response.hasOwnProperty(response.main.temp) !== null || undefined) $weather.append('<p><strong>Temperature:</strong> ' + response.main.temp + '\xB0C</p>');
+      if (response.hasOwnProperty(response.main.humidity) !== null || undefined) $weather.append('<p><strong>Humidity:</strong> ' + response.main.humidity + '%</p>');
+      if (response.hasOwnProperty(response.main.pressure) !== null || undefined) $weather.append('<p><strong>Pressure:</strong> ' + response.main.pressure + ' mb</p>');
+      if (response.hasOwnProperty(response.wind.speed) !== null || undefined) $weather.append('<p><strong>Wind Speed:</strong> ' + response.wind.speed + ' mph</p>');
+      if (response.hasOwnProperty(response.wind.deg) !== null || undefined) $weather.append('<p><strong>Wind Direction:</strong> ' + response.wind.deg + '\xB0</p>');
+      // if (response.hasOwnProperty(response.wind.gust) !== undefined) $weather.append(`<p><strong>Wind Gust:</strong> ${response.wind.gust}</p>`);
+      // if (response.hasOwnProperty(response.sys.sunrise) !== null || undefined) $weather.append(`<p><strong>Sunrise:</strong> ${response.sys.sunrise}</p>`);
+      // if (response.hasOwnProperty(response.sys.sunset) !== null || undefined) $weather.append(`<p><strong>Sunset:</strong> ${response.sys.sunset}</p>`);
+    });
   }
 
-  // function updateHeader() {
-  //   var bottomOfHeader = $header.offset().top + $header.height();
-  //   var h2Height = $window.height();
-  //
-  //   if (bottomOfHeader >= h2Height) {
-  //     $header.addClass('opaque');
-  //   } else {
-  //     $header.removeClass('opaque');
-  //   }
-  // }
-  //--------------------------------AUTOCOMPLETE--------------------------------//
-  var $input = $('.autocomplete');
-
-  if ($input.length) {
+  function resortAutocomplete() {
     var autocomplete = new google.maps.places.Autocomplete($input[0]);
 
     var $lat = $('input[name=lat]');
@@ -42,65 +57,25 @@ $(function () {
       var location = place.geometry.location.toJSON();
       $lat.val(location.lat);
       $lng.val(location.lng);
-      // console.log($lat.val(), $lng.val());
     });
   }
-  //-----------------------------------WEATHER----------------------------------//
-  // const weather = $('#weather').data('resort');
-  // console.log(weather);
-  var $weather = $('#weather');
 
-  if ($weather.length > 0) {
-    var lat = $weather.data('lat');
-    var lng = $weather.data('lng');
-    // console.log(lat, lng);
-
-    $.get('https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/' + lat + ',' + lng + '.json').done(function (response) {
-      // console.log(response);
-      var country = response.location.country;
-      var city = response.location.city;
-
-      $.get('https://api.wunderground.com/api/4dfbb04b4a67e340/forecast/q/' + country + '/' + city + '.json').done(function (response) {
-        // console.log(response);
-        // const location = `${country}, ${city}`;
-        // const snowfall = response.forecast.simpleforecast.forecastday[0].snow_allday.in;
-        $weather.append('<p><strong>Snowfall:</strong> ' + response.forecast.simpleforecast.forecastday[0].snow_allday.in + ' Inches</p>');
-        // console.log(response.forecast.simpleforecast.forecastday[0].snow_allday.in);
-
-        $.get('https://api.wunderground.com/api/4dfbb04b4a67e340/conditions/q/' + country + '/' + city + '.json').done(function (response) {
-          // console.log(response);
-          $weather.append('<p><strong>Temperature:</strong> ' + response.current_observation.temp_c + '\xB0C</p>');
-          // console.log(response.current_observation.temp_c);
-          $weather.append('<p><strong>Temperature:</strong> ' + response.current_observation.temp_f + '\xB0F</p>');
-          // console.log(response.current_observation.temp_f);
-          $weather.append('<p><strong>Weather:</strong> ' + response.current_observation.weather + '</p>');
-          // console.log(response.current_observation.weather);
-          $weather.append('<p><strong>Visibility:</strong> ' + response.current_observation.visibility_mi + ' Miles</p>');
-          // console.log(response.current_observation.visibility_mi);
-          $weather.append('<p><strong>Visibility:</strong> ' + response.current_observation.visibility_km + ' Kilometres</p>');
-          // console.log(response.current_observation.visibility_km);
-          $weather.append('<p><strong>Wind Condition:</strong> ' + response.current_observation.wind_string + '</p>');
-          // console.log(response.current_observation.wind_string);
-        });
-      });
-    });
+  function toggleMenu() {
+    $('.dropdown').slideToggle();
   }
-  //------------------------------------MAP-------------------------------------//
-  var $map = $('#map');
-  var map = null;
-  var infowindow = null;
-  if ($map.length) initMap();
 
   function initMap() {
     var lat = $map.data('lat');
     var lng = $map.data('lng');
     var latLng = { lat: lat, lng: lng };
+
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       center: latLng,
       scrollwheel: false,
       styles: mapStyles
     });
+
     addMarker(location);
   }
 
@@ -108,6 +83,7 @@ $(function () {
     var lat = $map.data('lat');
     var lng = $map.data('lng');
     var latLng = { lat: lat, lng: lng };
+
     var marker = new google.maps.Marker({
       position: latLng,
       map: map
@@ -115,7 +91,7 @@ $(function () {
     });
 
     marker.addListener('click', function () {
-      markerClick(marker, location);
+      return markerClick(marker, location);
     });
   }
 
@@ -123,8 +99,9 @@ $(function () {
     if (infowindow) infowindow.close();
 
     infowindow = new google.maps.InfoWindow({
-      content: '\n      <div class="infowindow">\n        <h3>General Assembly London</h3>\n        <p><strong>Address: </strong>The Relay Building, 1 Commercial St, London E1 7PT</p>\n        <p><strong>Phone: </strong>020 3308 9506</p>\n      </div>\n      '
+      content: '<div class="infowindow">\n        <h3>General Assembly London</h3>\n        <p><strong>Address: </strong>The Relay Building, 1 Commercial St, London E1 7PT</p>\n        <p><strong>Phone: </strong>020 3308 9506</p>\n      </div>'
     });
+
     infowindow.open(map, marker);
   }
 });

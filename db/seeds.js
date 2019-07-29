@@ -2,7 +2,9 @@ const mongoose    = require('mongoose');
 const { dbURI }   = require('../config/environment');
 
 mongoose.Promise  = require('bluebird');
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, {
+  useMongoClient: true
+});
 
 const Resort = require('../models/resort');
 const User = require('../models/user');
@@ -17,8 +19,8 @@ User
     username: 'raidendilan',
     email: 'raiden18@me.com',
     password: 'password',
-    passwordConfirmation: 'password',
-    profileImage: 'http://icon-icons.com/icons2/510/PNG/512/ios7-contact_icon-icons.com_50286.png'
+    passwordConfirmation: 'password'
+    // profileImage: 'http://icon-icons.com/icons2/510/PNG/512/ios7-contact_icon-icons.com_50286.png'
   }])
   .then((users) => {
     console.log(`${users.length} User(s) created`);
@@ -38,5 +40,5 @@ User
       }]);
   })
   .then((resorts) => console.log(`${resorts.length} Resort(s) created`))
-  .catch((err) => console.log(err))
+  .catch((err) => console.log('err --->', err))
   .finally(() => mongoose.connection.close());

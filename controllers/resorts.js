@@ -1,4 +1,6 @@
 const Resort = require('../models/resort');
+const rp = require('request-promise');
+const { apiKey } = require('../config/environment.js');
 
 function indexRoute(req, res, next) {
   Resort
@@ -18,6 +20,7 @@ function createRoute(req, res, next) {
   if(req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
   req.body = Object.assign({}, req.body);
+
   Resort
     .create(req.body)
     .then(() => res.redirect('/resorts'))
@@ -30,7 +33,7 @@ function createRoute(req, res, next) {
 function showRoute(req, res, next) {
   Resort
     .findById(req.params.id)
-    .populate('comments.createdBy')
+    .populate('createdBy comments.createdBy')
     .exec()
     .then((resort) => {
       if(!resort) return res.notFound();
@@ -41,6 +44,7 @@ function showRoute(req, res, next) {
 
 function editRoute(req, res, next) {
   // req.body.createdBy = req.user;
+
   Resort
     .findById(req.params.id)
     .exec()
@@ -52,6 +56,7 @@ function editRoute(req, res, next) {
 
 function updateRoute(req, res, next) {
   // if (req.file) req.body.image = req.file.key;
+
   Resort
     .findById(req.params.id)
     .exec()
@@ -93,7 +98,6 @@ function deleteRoute(req, res, next) {
 }
 
 function createCommentRoute(req, res, next) {
-
   req.body.createdBy = req.user;
 
   Resort

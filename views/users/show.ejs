@@ -26,9 +26,9 @@
       <% if(locals.isAuthenticated && (user.id == user.id)) { %>
         <form method="POST" action="/users/<%= user.id %>/images" enctype="multipart/form-data" class="feedImages">
           <div class="form-group">
-            <label for="userPicture">Profile Feed - Start uploading images</label>
+            <label for="userFeed">Profile Feed - Start uploading images</label>
             <div class="fileBox">
-              <input type="file" name="userPicture" id="userPicture" class="form-control seeThrough">
+              <input type="file" name="userFeed" id="userFeed" class="form-control seeThrough">
             </div>
           </div>
           <div class="form-group">

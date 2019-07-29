@@ -1,13 +1,13 @@
-const gulp       = require('gulp');
-const babel      = require('gulp-babel');
-const sass       = require('gulp-sass');
-const cleanCSS   = require('gulp-clean-css');
-const plumber    = require('gulp-plumber');
-const sequence   = require('gulp-sequence');
-const notify     = require('gulp-notify');
-const del        = require('del');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const sass = require('gulp-sass');
+const cleanCSS = require('gulp-clean-css');
+const plumber = require('gulp-plumber');
+const sequence = require('gulp-sequence');
+const notify = require('gulp-notify');
+const del = require('del');
 // const flatten       = require('gulp-flatten');
-const nodemon    = require('gulp-nodemon');
+const nodemon = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
 
 const src = 'src';
@@ -33,31 +33,34 @@ gulp.task('nodemon', () => {
   return nodemon({
     script: 'server.js',
     ext: 'js html',
-    env: { 'NODE_ENV': 'development' }
+    env: { NODE_ENV: 'development' }
   });
 });
 
 gulp.task('scripts', () => {
-  return gulp.src(`${src}/**/*.js`)
-        .pipe(plumber({ errorHandler: reportError }))
-        .pipe(babel({ presets: ['es2015']}))
-        .pipe(gulp.dest(dist))
-    .pipe(livereload());
-});
-
-gulp.task('sass', () => {
-  return gulp.src(`${src}/**/style.scss`)
+  return gulp
+    .src(`${src}/**/*.js`)
     .pipe(plumber({ errorHandler: reportError }))
-    .pipe(sass())
-        .pipe(cleanCSS({ compatibility: 'ie8'}))
-    // .pipe(flatten())
+    .pipe(babel({ presets: ['env'] }))
     .pipe(gulp.dest(dist))
     .pipe(livereload());
 });
 
+gulp.task('sass', () => {
+  return (
+    gulp
+      .src(`${src}/**/style.scss`)
+      .pipe(plumber({ errorHandler: reportError }))
+      .pipe(sass())
+      .pipe(cleanCSS({ compatibility: 'ie8' }))
+      // .pipe(flatten())
+      .pipe(gulp.dest(dist))
+      .pipe(livereload())
+  );
+});
+
 gulp.task('assets', () => {
-  return gulp.src(`${src}/assets/**/*`)
-    .pipe(gulp.dest(`${dist}/assets`));
+  return gulp.src(`${src}/assets/**/*`).pipe(gulp.dest(`${dist}/assets`));
 });
 
 gulp.task('watch', () => {

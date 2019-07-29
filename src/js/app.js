@@ -1,17 +1,49 @@
+// var resort = resort || {};
+
 $(() => {
   var $links = $('nav a');
   var $menu = $('.menu');
+  var $map = $('#map');
+  var $input = $('.autocomplete');
+  var $weather = $('#weather'); // var weather = $('#weather').data('resort');
+  var successMessage = $('.success');
+  var closeMessageBtn = $('.close-message');
+  let map = null;
+  let infowindow = null;
 
-  $links.on('click');
-  $menu.on('click', toggleMenu);
+  if ($map.length) initMap();
+  if ($input.length ) resortAutocomplete();
+  if ($weather.length) resortWeather();
+  if ($links.length) $links.on('click');
+  if ($menu.length) $menu.on('click', toggleMenu);
+  if (closeMessageBtn.length) closeMessageBtn.on('click', () => successMessage.css({
+    opacity: '0', transform: 'translateY(-26px)', transition: 'transform 250ms linear, opacity 250ms linear'
+  }));
 
-  function toggleMenu() {
-    $('.dropdown').slideToggle();
+  function resortWeather() {
+    const lat = $weather.data('lat');
+    const lng = $weather.data('lng');
+
+    // const apiKey = process.env.OPENWEATHER_API_KEY;
+    const apiKey = 'c0aaf890acd712dca9aeaac226d30652';
+    let baseUrl = `http://api.openweathermap.org/data/2.5`;
+
+    // $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/${lat},${lng}.json`)
+    $.get(`${baseUrl}/weather?lat=${lat}&lon=${lng}&units=metric&appid=${apiKey}`)
+      .done((response) => {
+        if (response.hasOwnProperty(response.weather[0].description) !== null || undefined) $weather.append(`<p><strong>Cloudiness:</strong> ${response.weather[0].description}</p>`);
+        if (response.hasOwnProperty(response.main.temp) !== null || undefined) $weather.append(`<p><strong>Temperature:</strong> ${response.main.temp}°C</p>`);
+        if (response.hasOwnProperty(response.main.humidity) !== null || undefined) $weather.append(`<p><strong>Humidity:</strong> ${response.main.humidity}%</p>`);
+        if (response.hasOwnProperty(response.main.pressure) !== null || undefined) $weather.append(`<p><strong>Pressure:</strong> ${response.main.pressure} mb</p>`);
+        if (response.hasOwnProperty(response.wind.speed) !== null || undefined) $weather.append(`<p><strong>Wind Speed:</strong> ${response.wind.speed} mph</p>`);
+        if (response.hasOwnProperty(response.wind.deg) !== null || undefined) $weather.append(`<p><strong>Wind Direction:</strong> ${response.wind.deg}°</p>`);
+        // if (response.hasOwnProperty(response.wind.gust) !== undefined) $weather.append(`<p><strong>Wind Gust:</strong> ${response.wind.gust}</p>`);
+        // if (response.hasOwnProperty(response.sys.sunrise) !== null || undefined) $weather.append(`<p><strong>Sunrise:</strong> ${response.sys.sunrise}</p>`);
+        // if (response.hasOwnProperty(response.sys.sunset) !== null || undefined) $weather.append(`<p><strong>Sunset:</strong> ${response.sys.sunset}</p>`);
+      });
   }
-//--------------------------------AUTOCOMPLETE--------------------------------//
-  const $input = $('.autocomplete');
 
-  if($input.length) {
+  function resortAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete($input[0]);
 
     const $lat = $('input[name=lat]');
@@ -24,83 +56,52 @@ $(() => {
       $lng.val(location.lng);
     });
   }
-//-----------------------------------WEATHER----------------------------------//
-// const weather = $('#weather').data('resort');
-// console.log(weather);
-  const $weather = $('#weather');
 
-  if($weather.length > 0) {
-    const lat = $weather.data('lat');
-    const lng = $weather.data('lng');
-    // console.log(lat, lng);
-
-    $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/geolookup/q/${lat},${lng}.json`)
-    .done((response) => {
-      const country = response.location.country;
-      const city = response.location.city;
-
-      $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/forecast/q/${country}/${city}.json`)
-      .done((response) => {
-        $weather.append(`<p><strong>Snowfall:</strong> ${response.forecast.simpleforecast.forecastday[0].snow_allday.in} Inches</p>`);
-
-        $.get(`https://api.wunderground.com/api/4dfbb04b4a67e340/conditions/q/${country}/${city}.json`)
-        .done((response) => {
-          $weather.append(`<p><strong>Temperature:</strong> ${response.current_observation.temp_c}°C</p>`);
-          $weather.append(`<p><strong>Temperature:</strong> ${response.current_observation.temp_f}°F</p>`);
-          $weather.append(`<p><strong>Weather:</strong> ${response.current_observation.weather}</p>`);
-          $weather.append(`<p><strong>Visibility:</strong> ${response.current_observation.visibility_mi} Miles</p>`);
-          $weather.append(`<p><strong>Visibility:</strong> ${response.current_observation.visibility_km} Kilometres</p>`);
-          $weather.append(`<p><strong>Wind Condition:</strong> ${response.current_observation.wind_string}</p>`);
-        });
-      });
-    });
+  function toggleMenu() {
+    $('.dropdown').slideToggle();
   }
-//------------------------------------MAP-------------------------------------//
-  const $map = $('#map');
-  let map = null;
-  let infowindow = null;
-  if ($map.length) initMap();
 
   function initMap() {
     var lat = $map.data('lat');
     var lng = $map.data('lng');
     const latLng = { lat: lat, lng: lng };
+
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       center: latLng,
       scrollwheel: false,
       styles: mapStyles
     });
+
     addMarker(location);
   }
 
   function addMarker(location) {
     var lat = $map.data('lat');
     var lng = $map.data('lng');
-    const latLng = { lat: lat, lng: lng };
+    var latLng = { lat: lat, lng: lng };
+
     const marker = new google.maps.Marker({
       position: latLng,
       map: map
       // icon: '../assets/images/dot.svg'
     });
 
-    marker.addListener('click', () => {
-      markerClick(marker, location);
-    });
+    marker.addListener('click', () => markerClick(marker, location));
   }
 
   function markerClick(marker) {
     if(infowindow) infowindow.close();
 
     infowindow = new google.maps.InfoWindow({
-      content: `
-      <div class="infowindow">
+      content:
+      `<div class="infowindow">
         <h3>General Assembly London</h3>
         <p><strong>Address: </strong>The Relay Building, 1 Commercial St, London E1 7PT</p>
         <p><strong>Phone: </strong>020 3308 9506</p>
-      </div>
-      `
+      </div>`
     });
+
     infowindow.open(map, marker);
   }
 });

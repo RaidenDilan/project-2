@@ -4,6 +4,9 @@
 </section>
 <div class="container">
   <form method="POST" action="/register" enctype="multipart/form-data">
+
+    <input type="hidden" name="_method" value="PUT">
+
     <div>
       <label for="firstname">Firstname</label>
       <input type="text" name="firstname" id="firstname" class="form-control">

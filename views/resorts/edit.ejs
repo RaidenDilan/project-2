@@ -1,64 +1,67 @@
 <section>
-    <h1>Edit</h1>
-    <hr>
-</section>
-  <div class="container">
-
-    <form method="POST" action="/resorts/<%= resort.id %>">
-      <input type="hidden" name="_method" value="PUT">
-
-      <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="<%= resort.name %>" class="form-control">
-      </div>
-
-      <div>
-        <label for="website">Website</label>
-        <input type="text" name="website" id="website" value="<%= resort.website %>" class="form-control">
-      </div>
-
-      <div>
-        <label for="country">Country</label>
-        <input type="text" name="country" id="country" value="<%= resort.country %>" class="form-control">
-      </div>
-
-      <div>
-        <label for="city">City</label>
-        <input type="text" name="city" id="city" value="<%= resort.city %>" class="form-control">
-      </div>
-
-      <div>
-        <label for="address">Address</label>
-        <input type="text" name="addres" id="address"class="autocomplete form-control">
-        <input type="hidden" name="lat">
-        <input type="hidden" name="lng">
-      </div>
-      <div>
-        <label for="lifts">Lifts</label>
-        <input type="text" name="lifts" id="lifts" value="<%= resort.lifts %>" class="form-control">
-      </div>
-
-      <div>
-        <label for="rating">Rating</label>
-        <input type="text" name="rating" id="rating"class="form-control">
-      </div>
-
-      <%# <div>
-        <label for="image">Image</label>
-        <input type="file" name="image" id="image" class="filename">
-      </div> %>
-
-      <button class="deletebuttons">Update Resort</button>
-
-    </form>
-  </div>
+  <h1>Edit</h1>
   <hr>
-  <div id="location">
-    <div class="row">
-      <div class="col-sm-10 offset-sm-1">
-        <div id="map" data-lat=<%= resort.lat %> data-lng=<%= resort.lng %>></div>
-      </div>
+</section>
+
+<div class="container">
+
+  <form method="POST" action="/resorts/<%= resort.id %>">
+    <input type="hidden" name="_method" value="PUT">
+
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="<%= resort.name %>" class="form-control">
+    </div>
+
+    <div>
+      <label for="website">Website</label>
+      <input type="text" name="website" id="website" value="<%= resort.website %>" class="form-control">
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <input type="text" name="country" id="country" value="<%= resort.country %>" class="form-control">
+    </div>
+
+    <div>
+      <label for="city">City</label>
+      <input type="text" name="city" id="city" value="<%= resort.city %>" class="form-control">
+    </div>
+
+    <div>
+      <label for="address">Address</label>
+      <input type="text" name="addres" id="address"class="autocomplete form-control">
+      <input type="hidden" name="lat">
+      <input type="hidden" name="lng">
+    </div>
+
+    <div>
+      <label for="lifts">Lifts</label>
+      <input type="text" name="lifts" id="lifts" value="<%= resort.lifts %>" class="form-control">
+    </div>
+
+    <div>
+      <label for="rating">Rating</label>
+      <input type="text" name="rating" id="rating"class="form-control">
+    </div>
+
+    <!-- <div>
+      <label for="image">Image</label>
+      <input type="file" name="image" id="image" class="filename">
+    </div> -->
+
+    <button class="deletebuttons">Update Resort</button>
+
+  </form>
+
+</div>
+
+<hr>
+
+<!-- <div id="location">
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <div id="map" data-lat=<%= resort.lat %> data-lng=<%= resort.lng %>></div>
     </div>
   </div>
-  <hr>
-</div>
+</div> -->
