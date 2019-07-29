@@ -32,10 +32,8 @@
         <form method="POST" action="/users/<%= user.id %>/images" enctype="multipart/form-data" class="feedImages">
 
           <div class="form-group">
-            <label for="userFeed">Upload new image to your feed</label>
-            <div class="fileBox">
-              <input type="file" name="userFeed" id="userFeed" class="form-control seeThrough">
-            </div>
+            <input class="custom-file-input" id="userFeed" type="file" name="userFeed">
+            <!-- <label tabindex="0" for="userFeed">Select a file...</label> -->
           </div>
 
           <div class="form-group">
@@ -57,12 +55,11 @@
             <img
               src="<%= image.src %>" alt="<%= image.caption %>"
               class="img-fluid img-thumbnail"
-              id="userFeedImage"
               data-toggle="modal"
-              data-target="#<%= image.id %>">
+              data-target="#userFeedModal">
           </div>
 
-          <div class="modal fade" id="<%=image.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal fade" id="userFeedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
@@ -79,10 +76,10 @@
                   <% if(locals.isAuthenticated && (user.id == user.id)) { %>
                     <form method="POST" action="/users/<%=user.id%>/images/<%=image.id%>">
                       <input type="hidden" name="_method" value="DELETE">
-                      <button class="btn-danger">Delete</button>
+                      <button class="buttons">Delete</button>
                     </form>
                   <% } %>
-                  <button type="button" data-dismiss="modal" class="btn-primary">Close</button>
+                  <button type="button" data-dismiss="modal" class="buttons">Close</button>
                 </div>
 
               </div>

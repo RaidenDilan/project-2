@@ -11,31 +11,34 @@ Resort.collection.drop();
 User.collection.drop();
 
 User
-  .create([{
-    firstname: 'Raiden',
-    lastname: 'Dilan',
-    username: 'raidendilan',
-    email: 'raiden18@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
-    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-  }, {
-    firstname: 'Luca',
-    lastname: 'Ancelotti',
-    username: 'lucaancelotti',
-    email: 'luca@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
-    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-  }, {
-    firstname: 'Rawand',
-    lastname: 'Dilan',
-    username: 'rawanddilan',
-    email: 'rawand@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
-    profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-  }])
+  .create([
+    {
+      firstname: 'Raiden',
+      lastname: 'Dilan',
+      username: 'raidendilan',
+      email: 'raiden18@me.com',
+      password: 'password',
+      passwordConfirmation: 'password',
+      profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+    }
+    // ,{
+    //   firstname: 'Luca',
+    //   lastname: 'Ancelotti',
+    //   username: 'lucaancelotti',
+    //   email: 'luca@me.com',
+    //   password: 'password',
+    //   passwordConfirmation: 'password',
+    //   profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+    // },{
+    //   firstname: 'Rawand',
+    //   lastname: 'Dilan',
+    //   username: 'rawanddilan',
+    //   email: 'rawand@me.com',
+    //   password: 'password',
+    //   passwordConfirmation: 'password',
+    //   profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+    // }
+  ])
   .then((users) => {
     console.log(`${users.length} User(s) created`);
     return Resort
@@ -60,7 +63,7 @@ User
         rating: 3,
         lat: '45.5224382',
         lng: '6.6572824',
-        createdBy: users[1],
+        createdBy: users[0], // user[1]
         comment: [ 'Looks Dope!' ],
         image: 'https://img5.onthesnow.com/image/xl/76/76654.jpg'
       }]);

@@ -13,8 +13,12 @@ body {
   font-family: 'Avenir Next', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-* {
+*, *:before, *:after {
+	outline: none;
+	box-sizing: inherit;
   font-family: inherit;
+	margin: 0;
+	padding: 0;
 }
 
 a {
@@ -170,17 +174,17 @@ input {
   // border: 2px solid black;
 }
 
-div.info {
-  h5 {
-    text-align: center;
-    padding-top: 80px;
-    text-transform: uppercase;
-    text-decoration: underline;
-  }
-}
+// div.info {
+//   h5 {
+//     text-align: center;
+//     padding-top: 80px;
+//     text-transform: uppercase;
+//     text-decoration: underline;
+//   }
+// }
 
 div.flash-messages {
-  div.success, div.alert, div.error {
+  div.success, div.alert, div.error, div.info {
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
@@ -188,6 +192,7 @@ div.flash-messages {
     top: -26px;
     left: 0;
     background-color: #000000;
+    border-radius: 0;
     color: #FFFFFF;
     margin: 0;
     opacity: 0;
@@ -376,14 +381,27 @@ footer {
   color: $black;
   outline: none;
   border: none;
+
+  // &:hover {
+  //   background-color: $black;
+  //   color: $white;
+  //   transition: background-color 0.9s ease;
+  // }
+}
+
+.img-thumbnail {
+  cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform 500ms;
+
   &:hover {
-    background-color: $black;
-    color: $white;
-    transition: background-color 0.9s ease;
+    transform: scale(1.05, 1.05);
+    transition: transform 500ms;
   }
 }
 
 .buttons {
+  border: 0;
   line-height: 0.25;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -396,9 +414,10 @@ footer {
   outline: none;
 
   &:hover {
-    background-color: $black;
-    color: $white;
-    transition: background-color 0.9s ease;
+    // background-color: $black;
+    // color: $white;
+    color: $black;
+    transition: background-color 500ms ease;
     text-decoration: none;
   }
 }
@@ -433,6 +452,72 @@ footer {
 .contacts {
   width: 50px;
 }
+
+// #file-upload {
+//   position: absolute;
+//   left: -9999px;
+// }
+//
+// label[for='file-upload'] {
+//   padding: 0.5em;
+//   display: inline-block;
+//   background: #623475;
+//   cursor: pointer;
+// }
+// label[for='file-upload']:hover {
+//   background: #6b3880;
+// }
+//
+// .input-file-trigger {
+//   display: block;
+//   padding: 14px 45px;
+//   background: #39D2B4;
+//   color: #ffffff;
+//   font-size: 1em;
+//   transition: all .4s;
+//   cursor: pointer;
+// }
+//
+// .input-file:hover + .input-file-trigger,
+// .input-file:focus + .input-file-trigger,
+// .input-file-trigger:hover,
+// .input-file-trigger:focus {
+//   background: #34495E;
+//   color: #39D2B4;
+// }
+
+.custom-file-input {
+  color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select a file';
+  color: #000000;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
 
 small {
   display: inherit;
@@ -547,11 +632,30 @@ small {
     padding: 0;
     margin-right: 0;
     width: 100%;
+
+    button {
+      padding: 13px;
+      margin: 5px 0;
+      border: 0;
+      color: $black;
+      background-color: #ff1717;
+      transform: scale(1, 1);
+      transition: color 250ms ease, transform 500ms ease;
+
+      &:hover {
+        transform: scale(1.01, 1.01);
+        transition: color 250ms ease, transform 500ms ease;
+      }
+
+      // &:hover {
+        // background-color: $black;
+        // color: $white;
+        // transition: color 250ms ease;
+        // text-decoration: none;
+      // }
+    }
   }
-  > :not(:first-child) {
-    margin: 0;
-  }
-  > :not(:last-child) {
+  > :not(:first-child), > :not(:last-child) {
     margin: 0;
   }
 
@@ -559,21 +663,28 @@ small {
     padding: 0;
     margin: 0;
     width: 100%;
-    padding: 5px;
+    padding: 13px;
     margin: 5px 0;
     color: $black;
+    background-color: $brand;
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
     outline: none;
-    transition: color 250ms ease;
+    transform: scale(1, 1);
+    transition: color 250ms ease, transform 500ms ease;
 
     &:hover {
-      // background-color: $black;
-      color: $white;
-      transition: color 250ms ease;
-      text-decoration: none;
+      transform: scale(1.01, 1.01);
+      transition: color 250ms ease, transform 500ms ease;
     }
+
+    // &:hover {
+      // background-color: $black;
+      // color: $white;
+      // transition: color 250ms ease;
+      // text-decoration: none;
+    // }
   }
 }
 

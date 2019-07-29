@@ -12,7 +12,7 @@
         <a href="/resorts/<%= resort.id %>/edit" class="buttons delete-form">Edit Resort</a>
         <form action="/resorts/<%= resort.id %>" method="POST" class="delete-form">
           <input type="hidden" name="_method" value="DELETE"/>
-          <button class="deletebuttons">Delete Resort</button>
+          <button class="buttons">Delete Resort</button>
         </form>
         <hr>
       </div>
@@ -32,7 +32,7 @@
 <div class="container">
   <h3 class="caption">Weather Conditions</h3>
   <hr>
-  <img src="/assets/images/logos/wu.png" type"image/png" alt="wu" id="wu">
+  <!-- <img src="/assets/images/logos/wu.png" type"image/png" alt="wu" id="wu"> -->
   <div id="weather" data-lat="<%= resort.lat %>" data-lng="<%= resort.lng %>"></div>
 </div>
 
@@ -59,7 +59,7 @@
   <% if(locals.isAuthenticated) { %>
     <form method="POST" action="/resorts/<%= resort.id %>/comments">
       <textarea name="content" id="content" rows="2" cols="20" class="form-control"></textarea>
-      <button class="deletebuttons submit">Leave a Comment</button>
+      <button class="buttons submit">Leave a Comment</button>
     </form>
   <% } %>
   <h3 class="caption">Map</h3>
