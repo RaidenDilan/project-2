@@ -1,10 +1,12 @@
-const User  = require('../models/user');
+const User = require('../models/user');
 const oauth = require('../config/oauth');
 
+// OAUTH LOGIN
 function sessionsNew(req, res) {
   res.render('sessions/new', { oauth });
 }
 
+// LOGIN
 function sessionsCreate(req, res, next) {
   User
     .findOne({ email: req.body.email })
@@ -24,6 +26,7 @@ function sessionsCreate(req, res, next) {
     .catch(next);
 }
 
+// LOGOUT
 function sessionsDelete(req, res) {
   req.session.regenerate(() => res.redirect('/'));
 }

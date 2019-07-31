@@ -20,16 +20,16 @@ User
       password: 'password',
       passwordConfirmation: 'password',
       profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-    }
-    // ,{
-    //   firstname: 'Luca',
-    //   lastname: 'Ancelotti',
-    //   username: 'lucaancelotti',
-    //   email: 'luca@me.com',
-    //   password: 'password',
-    //   passwordConfirmation: 'password',
-    //   profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-    // },{
+    },{
+      firstname: 'Luca',
+      lastname: 'Ancelotti',
+      username: 'lucaancelotti',
+      email: 'luca@me.com',
+      password: 'password',
+      passwordConfirmation: 'password',
+      profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
+    },
+    // {
     //   firstname: 'Rawand',
     //   lastname: 'Dilan',
     //   username: 'rawanddilan',

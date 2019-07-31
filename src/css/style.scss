@@ -346,6 +346,15 @@ footer {
   }
 }
 
+.comments {
+  button {
+    padding: 10px 5px;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin: 5px;
+  }
+}
+
 .delete-form {
   display: inline-block;
   text-align: center;
@@ -523,8 +532,8 @@ small {
   display: inherit;
 }
 
-#wu {
-  max-width: 10%;
+#openweather {
+  max-width: 2.5%;
   text-align: center;
   display: inline-block;
   margin-bottom: 10px;

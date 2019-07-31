@@ -55,8 +55,8 @@ router.route('/resorts/:id/comments/:commentId')
 
 // ------------------------------- AUTH ------------------------------------- //
 
-router.route('/profile')
-  .delete(secureRoute, registrations.delete);
+// router.route('/profile')
+//   .delete(secureRoute, registrations.delete);
 
 router.route('/register')
   .get(registrations.new)

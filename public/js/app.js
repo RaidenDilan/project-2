@@ -4,10 +4,10 @@
 
 $(function () {
   var $links = $('nav a');
-  var $menu = $('.menu');
   var $map = $('#map');
+  var $weather = $('#weather');
+  var $menu = $('.menu');
   var $input = $('.autocomplete');
-  var $weather = $('#weather'); // var weather = $('#weather').data('resort');
   var successMessage = $('.flash-messages');
   var closeMessageBtn = $('.close-message');
   var map = null;
@@ -33,15 +33,17 @@ $(function () {
     var lng = $weather.data('lng');
 
     $.get('/weather', { lat: lat, lng: lng }).done(function (response) {
-      if (response.hasOwnProperty(response.weather[0].description) !== null || undefined) $weather.append('<p><strong>Cloudiness:</strong> ' + response.weather[0].description + '</p>');
-      if (response.hasOwnProperty(response.main.temp) !== null || undefined) $weather.append('<p><strong>Temperature:</strong> ' + response.main.temp + '\xB0C</p>');
-      if (response.hasOwnProperty(response.main.humidity) !== null || undefined) $weather.append('<p><strong>Humidity:</strong> ' + response.main.humidity + '%</p>');
-      if (response.hasOwnProperty(response.main.pressure) !== null || undefined) $weather.append('<p><strong>Pressure:</strong> ' + response.main.pressure + ' mb</p>');
-      if (response.hasOwnProperty(response.wind.speed) !== null || undefined) $weather.append('<p><strong>Wind Speed:</strong> ' + response.wind.speed + ' mph</p>');
-      if (response.hasOwnProperty(response.wind.deg) !== null || undefined) $weather.append('<p><strong>Wind Direction:</strong> ' + response.wind.deg + '\xB0</p>');
-      // if (response.hasOwnProperty(response.wind.gust) !== undefined) $weather.append(`<p><strong>Wind Gust:</strong> ${response.wind.gust}</p>`);
-      // if (response.hasOwnProperty(response.sys.sunrise) !== null || undefined) $weather.append(`<p><strong>Sunrise:</strong> ${response.sys.sunrise}</p>`);
-      // if (response.hasOwnProperty(response.sys.sunset) !== null || undefined) $weather.append(`<p><strong>Sunset:</strong> ${response.sys.sunset}</p>`);
+
+      // PERHAPS CHANGE THESE CONDITIONALS TO A SWITCH STATEMENT
+      if (response.hasOwnProperty(response.weather[0].description) !== null) $weather.append('<p><strong>Cloudiness:</strong> ' + response.weather[0].description + '</p>');
+      if (response.hasOwnProperty(response.main.temp) !== null) $weather.append('<p><strong>Temperature:</strong> ' + response.main.temp + '\xB0C</p>');
+      if (response.hasOwnProperty(response.main.humidity) !== null) $weather.append('<p><strong>Humidity:</strong> ' + response.main.humidity + '%</p>');
+      if (response.hasOwnProperty(response.main.pressure) !== null) $weather.append('<p><strong>Pressure:</strong> ' + response.main.pressure + ' mb</p>');
+      if (response.hasOwnProperty(response.wind.speed) !== null) $weather.append('<p><strong>Wind Speed:</strong> ' + response.wind.speed + ' mph</p>');
+
+      if (response.hasOwnProperty(response.wind.deg) !== null && response.wind.deg !== undefined) $weather.append('<p><strong>Wind Direction:</strong> ' + response.wind.deg + '\xB0</p>');else if (response.wind.deg === undefined) $weather.append('<p><strong>Wind Direction:</strong> N/A</p>');
+
+      if (response.hasOwnProperty(response.wind.gust) !== null && response.wind.gust !== undefined) $weather.append('<p><strong>Wind Gust:</strong> ' + response.wind.gust + ' mph</p>');else if (response.wind.gust === undefined) $weather.append('<p><strong>Wind Gust:</strong> N/A</p>');
     });
   }
 
