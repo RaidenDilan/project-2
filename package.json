@@ -6,6 +6,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.10.2"
+  },
   "author": "Raiden Dilan <raiden18@me.com> (https://github.com/raidendilan)",
   "description": "",
   "license": "ISC",
