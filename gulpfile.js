@@ -53,7 +53,9 @@ gulp.task('sass', () => {
 });
 
 gulp.task('assets', () => {
-  return gulp.src(`${src}/assets/**/*`).pipe(gulp.dest(`${dist}/assets`));
+  return gulp
+    .src(`${src}/assets/**/*`)
+    .pipe(gulp.dest(`${dist}/assets`));
 });
 
 gulp.task('watch', () => {
