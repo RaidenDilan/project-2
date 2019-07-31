@@ -34,7 +34,8 @@ gulp.task('scripts', () => {
   return gulp
     .src(`${src}/**/*.js`)
     .pipe(plumber({ errorHandler: reportError }))
-    .pipe(babel({ presets: ['env'] }))
+    // .pipe(babel({ presets: ['env'] }))
+    .pipe(babel({ presets: ['@babel/env'] }))
     .pipe(gulp.dest(dist))
     .pipe(livereload());
 });
