@@ -3,11 +3,11 @@ const babel      = require('gulp-babel');
 const sass       = require('gulp-sass');
 const cleanCSS   = require('gulp-clean-css');
 const plumber    = require('gulp-plumber');
-const sequence   = require('gulp-sequence');
 const notify     = require('gulp-notify');
 const del        = require('del');
 const nodemon    = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
+// const sequence   = require('gulp-sequence');
 // const flatten    = require('gulp-flatten');
 const src  = 'src';
 const dist = 'public';
@@ -61,9 +61,10 @@ gulp.task('assets', () => {
 
 gulp.task('watch', () => {
   livereload.listen();
-  gulp.watch(`${src}/**/*.js`, ['scripts']);
-  gulp.watch(`${src}/**/*.scss`, ['sass']);
-  gulp.watch(`${src}/assets/**/*`, ['assets']);
+
+  gulp.watch(`${src}/**/*.js`, gulp.series('scripts'));
+  gulp.watch(`${src}/**/*.scss`, gulp.series('sass'));
+  gulp.watch(`${src}/assets/**/*`, gulp.series('assets'));
 });
 
-gulp.task('default', sequence('clean', ['scripts', 'sass', 'assets'], 'watch', 'nodemon'));
+gulp.task('default', gulp.parallel('clean', ['scripts', 'sass', 'assets'], 'watch', 'nodemon'));
