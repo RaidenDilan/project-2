@@ -1,28 +1,21 @@
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const sass = require('gulp-sass');
-const cleanCSS = require('gulp-clean-css');
-const plumber = require('gulp-plumber');
-const sequence = require('gulp-sequence');
-const notify = require('gulp-notify');
-const del = require('del');
-// const flatten       = require('gulp-flatten');
-const nodemon = require('gulp-nodemon');
+const gulp       = require('gulp');
+const babel      = require('gulp-babel');
+const sass       = require('gulp-sass');
+const cleanCSS   = require('gulp-clean-css');
+const plumber    = require('gulp-plumber');
+const sequence   = require('gulp-sequence');
+const notify     = require('gulp-notify');
+const del        = require('del');
+const nodemon    = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
-
-const src = 'src';
+// const flatten    = require('gulp-flatten');
+const src  = 'src';
 const dist = 'public';
 
 function reportError(error) {
-  // Trigger Mac OS notification
-  notify({
-    title: `Task Failed [${error.plugin}]`,
-    message: 'Check the console.'
-  }).write(error);
-  // Log the error in the terminal
-  console.log(error.toString());
-  // Prevents having to restart Gulp after a crash
-  this.emit('end');
+  notify({ title: `Task Failed [${error.plugin}]`, message: 'Check the console.' }).write(error); // Trigger Mac OS notification
+  console.log(error.toString()); // Log the error in the terminal
+  this.emit('end'); // Prevents having to restart Gulp after a crash
 }
 
 gulp.task('clean', () => {
