@@ -24,11 +24,11 @@ router.route('/users/:id')
 router.route('/users/:id/edit')
   .get(secureRoute, users.edit);
 
-router.route('/users/:id/images')
-  .post(secureRoute, upload.single('userFeed'), users.createImage);
-
-router.route('/users/:id/images/:imageId')
-  .delete(secureRoute, users.deleteImage);
+// router.route('/users/:id/images')
+//   .post(secureRoute, upload.single('userFeed'), users.createImage);
+//
+// router.route('/users/:id/images/:imageId')
+//   .delete(secureRoute, users.deleteImage);
 
 // ------------------------------- RESORT ----------------------------------- //
 

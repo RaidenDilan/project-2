@@ -61,41 +61,41 @@ function updateRoute(req, res, next) {
     });
 }
 
-function createImageRoute(req, res, next) {
-  if (req.file) req.body.filename = req.file.key;
-  req.body = Object.assign({}, req.body); // For some reason multer's req.body doesn't behave like body-parser's
-  req.user.images.push(req.body);
-
-  req.user
-    .save()
-    .then((user) => res.redirect(`/users/${user.id}`))
-    .catch((err) => {
-      if (err.name === 'ValidationError') return res.badRequest(`/users/${req.user.id}`, err.toString());
-      return next(err);
-    });
-}
-
-function deleteImageRoute(req, res, next) {
-  if (req.file) req.body.filename = req.file.key;
-
-  User
-    .findById(req.params.id)
-    .exec()
-    .then((user) => {
-      if(!user) return res.notFound();
-      const image = user.images.id(req.params.imageId);
-      image.remove();
-
-      return user.save();
-    })
-    .then(() => res.redirect(`/users/${req.params.id}`))
-    .catch(next);
-}
+// function createImageRoute(req, res, next) {
+//   if (req.file) req.body.filename = req.file.key;
+//   req.body = Object.assign({}, req.body); // For some reason multer's req.body doesn't behave like body-parser's
+//   req.user.images.push(req.body);
+//
+//   req.user
+//     .save()
+//     .then((user) => res.redirect(`/users/${user.id}`))
+//     .catch((err) => {
+//       if (err.name === 'ValidationError') return res.badRequest(`/users/${req.user.id}`, err.toString());
+//       return next(err);
+//     });
+// }
+//
+// function deleteImageRoute(req, res, next) {
+//   if (req.file) req.body.filename = req.file.key;
+//
+//   User
+//     .findById(req.params.id)
+//     .exec()
+//     .then((user) => {
+//       if(!user) return res.notFound();
+//       const image = user.images.id(req.params.imageId);
+//       image.remove();
+//
+//       return user.save();
+//     })
+//     .then(() => res.redirect(`/users/${req.params.id}`))
+//     .catch(next);
+// }
 
 module.exports = {
   show: showRoute,
   edit: editRoute,
-  update: updateRoute,
-  createImage: createImageRoute,
-  deleteImage: deleteImageRoute
+  update: updateRoute
+  // createImage: createImageRoute,
+  // deleteImage: deleteImageRoute
 };

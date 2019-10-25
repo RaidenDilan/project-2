@@ -26,7 +26,7 @@ app.use(expressLayouts);
 app.use(express.static(`${__dirname}/public`));
 
 // connect to our database
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // set up middleware
 if(env !== 'test') app.use(morgan('dev'));

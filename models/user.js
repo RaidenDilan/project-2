@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt   = require('bcrypt');
 const s3       = require('../lib/s3');
 
-const imageSchema = new mongoose.Schema({
-  filename: { type: String },
-  caption: { type: String }
-});
+// const imageSchema = new mongoose.Schema({
+//   filename: { type: String },
+//   caption: { type: String }
+// });
 
 const userSchema = new mongoose.Schema({
   firstname: { type: String },
@@ -15,16 +15,16 @@ const userSchema = new mongoose.Schema({
   profileImage: { type: String },
   password: { type: String },
   passwordconfirmation: { type: String },
-  githubId: { type: String },
-  images: [ imageSchema ]
+  githubId: { type: String }
+  // images: [ imageSchema ]
 });
 
-imageSchema
-  .virtual('src')
-  .get(function getImageSRC() {
-    if(!this.filename) return null;
-    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.filename}`;
-  });
+// imageSchema
+//   .virtual('src')
+//   .get(function getImageSRC() {
+//     if(!this.filename) return null;
+//     return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.filename}`;
+//   });
 
 userSchema
   .virtual('profileImageSRC')
