@@ -11,10 +11,10 @@
   <div class="accountButtons">
     <% if(locals.isAuthenticated && (user.id == user.id)) { %>
       <a href="/users/<%= user.id %>/edit" class="buttons">Edit Account</a>
-      <!-- <form method="POST" action="/profile">
+      <form method="POST" action="/profile">
         <input type="hidden" name="_method" value="DELETE">
         <button class="buttons">Delete Account</button>
-      </form> -->
+      </form>
     <% } %>
   </div>
 </div>

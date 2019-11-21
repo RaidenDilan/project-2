@@ -55,8 +55,8 @@ router.route('/resorts/:id/comments/:commentId')
 
 // ------------------------------- AUTH ------------------------------------- //
 
-// router.route('/profile')
-//   .delete(secureRoute, registrations.delete);
+router.route('/profile')
+  .delete(secureRoute, registrations.delete);
 
 router.route('/register')
   .get(registrations.new)
@@ -75,7 +75,7 @@ router.route('/oauth/github')
   .get(oauth.github);
 
 // router.route('/oauth/instagram')
-//   .get(oauth.facebook);
+//   .get(oauth.instagram);
 
 // router.route('/oauth/facebook')
 //   .get(oauth.facebook);
