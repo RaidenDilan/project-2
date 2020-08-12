@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { dbURI } = require('../config/environment');
+const { dbURI, dbOPS } = require('../config/environment');
 
 mongoose.Promise = require('bluebird');
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(dbURI, dbOPS);
 
 const Resort = require('../models/resort');
 const User = require('../models/user');
@@ -15,17 +15,17 @@ User
     firstname: 'Raiden',
     lastname: 'Dilan',
     username: 'raidendilan',
-    email: 'raiden18@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
+    email: 'raiden@gmail.com',
+    password: 'raiden20',
+    passwordConfirmation: 'raiden20',
     profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
   }, {
     firstname: 'Luca',
     lastname: 'Ancelotti',
     username: 'lucaancelotti',
-    email: 'luca@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
+    email: 'luca@gmail.com',
+      password: 'luca20',
+    passwordConfirmation: 'luca20',
     profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
   }])
   .then((users) => {
@@ -59,5 +59,5 @@ User
       }]);
   })
   .then((resorts) => console.log(`${resorts.length} Resort(s) created`))
-  .catch((err) => console.log('DB err --->', err))
+  .catch((err) => console.log('DB error ----->', err))
   .finally(() => mongoose.connection.close());
