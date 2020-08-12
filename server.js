@@ -9,7 +9,7 @@ const flash = require('express-flash');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 require('dotenv').config();
-const { port, env, dbURI, sessionSecret } = require('./config/environment');
+const { port, env, dbURI, dbOPS, sessionSecret } = require('./config/environment');
 const errorHandler = require('./lib/errorHandler');
 const routes = require('./config/routes');
 const customResponses = require('./lib/customResponses');
@@ -27,9 +27,8 @@ app.use(expressLayouts);
 app.use(express.static(`${__dirname}/public`));
 
 // connect to our database
-console.log(dbURI);
 mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbURI, dbOPS)
   .then(res => console.log('DB Connected'))
   .catch(err => console.log('Db Connection Failed '));
 
