@@ -10,12 +10,12 @@ function indexRoute(req, res, next) {
 }
 
 function newRoute(req, res) {
-  if(req.file) req.body.filename = req.file.key;
+  if (req.file) req.body.filename = req.file.key;
   return res.render('resorts/new');
 }
 
 function createRoute(req, res, next) {
-  if(req.file) req.body.image = req.file.key;
+  if (req.file) req.body.image = req.file.key;
   req.body.createdBy = req.user;
   req.body = Object.assign({}, req.body);
 
@@ -23,20 +23,20 @@ function createRoute(req, res, next) {
     .create(req.body)
     .then(() => res.redirect('/resorts'))
     .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest(`/resorts/${req.params.id}/edit`, err.toString());
+      if (err.name === 'ValidationError') return res.badRequest(`/resorts/${req.params.id}/edit`, err.toString());
       next(err);
     });
 }
 
 function showRoute(req, res, next) {
-  let baseUrl = `http://api.openweathermap.org/data/2.5`;
+  let baseUrl = 'http://api.openweathermap.org/data/2.5';
 
   Resort
     .findById(req.params.id)
     .populate('createdBy comments.createdBy')
     .exec()
     .then((resort) => {
-      if(!resort) return res.notFound();
+      if (!resort) return res.notFound();
       return res.render('resorts/show', { resort });
     })
     .catch(next);
@@ -70,9 +70,9 @@ function updateRoute(req, res, next) {
     //   }
     // })
     .then((resort) => {
-      if(!resort) return res.notFound();
+      if (!resort) return res.notFound();
 
-      for(const field in req.body) {
+      for (const field in req.body) {
         resort[field] = req.body[field];
       }
 
@@ -80,7 +80,7 @@ function updateRoute(req, res, next) {
     })
     .then(() => res.redirect(`/resorts/${req.params.id}`))
     .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest(`/resorts/${req.params.id}/edit`, err.toString());
+      if (err.name === 'ValidationError') return res.badRequest(`/resorts/${req.params.id}/edit`, err.toString());
       return next(err);
     });
 }
@@ -90,7 +90,7 @@ function deleteRoute(req, res, next) {
     .findById(req.params.id)
     .exec()
     .then((resort) => {
-      if(!resort) return res.notFound();
+      if (!resort) return res.notFound();
       return resort.remove();
     })
     .then(() => res.redirect('/resorts'))
@@ -101,31 +101,31 @@ function createCommentRoute(req, res, next) {
   req.body.createdBy = req.user;
 
   Resort
-  .findById(req.params.id)
-  .exec()
-  .then((resort) => {
-    if(!resort) return res.notFound();
+    .findById(req.params.id)
+    .exec()
+    .then((resort) => {
+      if (!resort) return res.notFound();
 
-    resort.comments.push(req.body); // create an embedded record
-    return resort.save();
-  })
-  .then((resort) => res.redirect(`/resorts/${resort.id}`))
-  .catch(next);
+      resort.comments.push(req.body); // create an embedded record
+      return resort.save();
+    })
+    .then((resort) => res.redirect(`/resorts/${resort.id}`))
+    .catch(next);
 }
 
 function deleteCommentRoute(req, res, next) {
   Resort
-  .findById(req.params.id)
-  .exec()
-  .then((resort) => {
-    if(!resort) return res.notFound();
-    const comment = resort.comments.id(req.params.commentId);
-    comment.remove();
+    .findById(req.params.id)
+    .exec()
+    .then((resort) => {
+      if (!resort) return res.notFound();
+      const comment = resort.comments.id(req.params.commentId);
+      comment.remove();
 
-    return resort.save();
-  })
-  .then((resort) => res.redirect(`/resorts/${resort.id}`))
-  .catch(next);
+      return resort.save();
+    })
+    .then((resort) => res.redirect(`/resorts/${resort.id}`))
+    .catch(next);
 }
 
 module.exports = {

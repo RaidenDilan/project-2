@@ -11,7 +11,7 @@ function sessionsCreate(req, res, next) {
   User
     .findOne({ email: req.body.email })
     .then((user) => {
-      if(!user || !user.validatePassword(req.body.password)) {
+      if (!user || !user.validatePassword(req.body.password)) {
         req.flash('error', 'Unknown email/password combination');
         return res.redirect('/login'); // return res.unauthorized('/login', 'Unknown credentials');
       }
@@ -21,7 +21,7 @@ function sessionsCreate(req, res, next) {
       req.user = user;
 
       req.flash('success', `Welcome back, ${user.username}!`);
-      res.redirect(`/resorts`); // res.redirect(`/users/${user.id}`);
+      res.redirect('/resorts'); // res.redirect(`/users/${user.id}`);
     })
     .catch(next);
 }

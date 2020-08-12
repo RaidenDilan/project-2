@@ -14,11 +14,11 @@ body {
 }
 
 *, *:before, *:after {
-	outline: none;
-	box-sizing: inherit;
+  outline: none;
+  box-sizing: inherit;
   font-family: inherit;
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -255,11 +255,11 @@ footer {
   text-align: center;
   // padding-right: 200px;
   p {
-  font-weight: 500;
-  font-size: 12px;
-  top: 5px;
-  color: $white;
-  padding: 10px 0;
+    font-weight: 500;
+    font-size: 12px;
+    top: 5px;
+    color: $white;
+    padding: 10px 0;
   }
 }
 
@@ -657,10 +657,10 @@ small {
       }
 
       // &:hover {
-        // background-color: $black;
-        // color: $white;
-        // transition: color 250ms ease;
-        // text-decoration: none;
+      // background-color: $black;
+      // color: $white;
+      // transition: color 250ms ease;
+      // text-decoration: none;
       // }
     }
   }
@@ -689,10 +689,10 @@ small {
     }
 
     // &:hover {
-      // background-color: $black;
-      // color: $white;
-      // transition: color 250ms ease;
-      // text-decoration: none;
+    // background-color: $black;
+    // color: $white;
+    // transition: color 250ms ease;
+    // text-decoration: none;
     // }
   }
 }

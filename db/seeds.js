@@ -1,11 +1,11 @@
-const mongoose  = require('mongoose');
+const mongoose = require('mongoose');
 const { dbURI } = require('../config/environment');
 
 mongoose.Promise = require('bluebird');
 mongoose.connect(dbURI, { useNewUrlParser: true });
 
 const Resort = require('../models/resort');
-const User   = require('../models/user');
+const User = require('../models/user');
 
 Resort.collection.drop();
 User.collection.drop();
@@ -19,7 +19,7 @@ User
     password: 'password',
     passwordConfirmation: 'password',
     profileImage: 'http://cdn.onlinewebfonts.com/svg/img_568656.png'
-  },{
+  }, {
     firstname: 'Luca',
     lastname: 'Ancelotti',
     username: 'lucaancelotti',

@@ -1,18 +1,18 @@
 // var resort = resort || {};
 
 $(() => {
-  var $links          = $('nav a');
-  var $map            = $('#map');
-  var $weather        = $('#weather');
-  var $menu           = $('.menu');
-  var $input          = $('.autocomplete');
-  var successMessage  = $('.flash-messages');
+  var $links = $('nav a');
+  var $map = $('#map');
+  var $weather = $('#weather');
+  var $menu = $('.menu');
+  var $input = $('.autocomplete');
+  var successMessage = $('.flash-messages');
   var closeMessageBtn = $('.close-message');
-  let map             = null;
-  let infowindow      = null;
+  let map = null;
+  let infowindow = null;
 
   if ($map.length !== 0) initMap();
-  if ($input.length !== 0 ) resortAutocomplete();
+  if ($input.length !== 0) resortAutocomplete();
   if ($weather.length !== 0) resortWeather();
   if ($links.length !== 0) $links.on('click');
   if ($menu.length !== 0) $menu.on('click', toggleMenu);
@@ -39,10 +39,10 @@ $(() => {
         if (response.hasOwnProperty(response.wind.speed) !== null) $weather.append(`<p><strong>Wind Speed:</strong> ${response.wind.speed} mph</p>`);
 
         if (response.hasOwnProperty(response.wind.deg) !== null && response.wind.deg !== undefined) $weather.append(`<p><strong>Wind Direction:</strong> ${response.wind.deg}°</p>`);
-        else if (response.wind.deg === undefined) $weather.append(`<p><strong>Wind Direction:</strong> N/A</p>`);
+        else if (response.wind.deg === undefined) $weather.append('<p><strong>Wind Direction:</strong> N/A</p>');
 
         if (response.hasOwnProperty(response.wind.gust) !== null && response.wind.gust !== undefined) $weather.append(`<p><strong>Wind Gust:</strong> ${response.wind.gust} mph</p>`);
-        else if (response.wind.gust === undefined) $weather.append(`<p><strong>Wind Gust:</strong> N/A</p>`);
+        else if (response.wind.gust === undefined) $weather.append('<p><strong>Wind Gust:</strong> N/A</p>');
       });
   }
 
@@ -90,7 +90,7 @@ $(() => {
   }
 
   function markerClick(marker) {
-    if(infowindow) infowindow.close();
+    if (infowindow) infowindow.close();
 
     infowindow = new google.maps.InfoWindow({
       content:

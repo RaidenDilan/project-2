@@ -17,7 +17,8 @@ function createRoute(req, res, next) {
       if (err.name === 'ValidationError') {
         req.flash('alert', 'Passwords do not match');
         return res.badRequest('/register', err.toString());
-      } else return next(err);
+      }
+      return next(err);
     });
 }
 

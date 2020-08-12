@@ -1,21 +1,17 @@
-const router        = require('express').Router();
+const router = require('express').Router();
 const registrations = require('../controllers/registrations');
-const sessions      = require('../controllers/sessions');
-const secureRoute   = require('../lib/secureRoute');
-const resorts       = require('../controllers/resorts');
-const upload        = require('../lib/upload');
-const users         = require('../controllers/users');
-const weather       = require('../controllers/weather');
-const oauth         = require('../controllers/oauth');
+const sessions = require('../controllers/sessions');
+const secureRoute = require('../lib/secureRoute');
+const resorts = require('../controllers/resorts');
+const upload = require('../lib/upload');
+const users = require('../controllers/users');
+const weather = require('../controllers/weather');
+const oauth = require('../controllers/oauth');
 
 router.get('/', (req, res) => res.render('statics/index'));
 
-// -------------------------- OPEN WEATHER API ------------------------------ //
-
 router.route('/weather')
   .get(weather.getWeather);
-
-// -------------------------------- USER ------------------------------------ //
 
 router.route('/users/:id')
   .get(secureRoute, users.show)
@@ -29,8 +25,6 @@ router.route('/users/:id/edit')
 //
 // router.route('/users/:id/images/:imageId')
 //   .delete(secureRoute, users.deleteImage);
-
-// ------------------------------- RESORT ----------------------------------- //
 
 router.route('/resorts')
   .get(secureRoute, resorts.index)
@@ -53,8 +47,6 @@ router.route('/resorts/:id/comments')
 router.route('/resorts/:id/comments/:commentId')
   .delete(secureRoute, resorts.deleteComment);
 
-// ------------------------------- AUTH ------------------------------------- //
-
 router.route('/profile')
   .delete(secureRoute, registrations.delete);
 
@@ -68,8 +60,6 @@ router.route('/login')
 
 router.route('/logout')
   .get(sessions.delete);
-
-// --------------------------------- OAUTH ---------------------------------- //
 
 router.route('/oauth/github')
   .get(oauth.github);

@@ -1,6 +1,6 @@
-const User    = require('../models/user');
+const User = require('../models/user');
 const Promise = require('bluebird');
-const s3      = Promise.promisifyAll({ suffix: 'Async'}, require('../lib/s3'));
+const s3 = Promise.promisifyAll({ suffix: 'Async' }, require('../lib/s3'));
 
 function showRoute(req, res, next) {
   User
@@ -8,7 +8,7 @@ function showRoute(req, res, next) {
     .populate('createdBy pics.createdBy')
     .exec()
     .then((user) => {
-      if(!user) return res.notFound();
+      if (!user) return res.notFound();
       else if (user) return res.render('users/show', { user });
     })
     .catch(next);
@@ -21,11 +21,11 @@ function editRoute(req, res, next) {
     .findById(req.params.id)
     .exec()
     .then((user) => {
-      if(!user) {
+      if (!user) {
         req.flash('alert', 'You must own this profile');
         return res.redirect(`/users/${user.id}`);
       }
-      else return res.render('users/edit', { user });
+      return res.render('users/edit', { user });
     })
     .catch(next);
 }
@@ -46,9 +46,9 @@ function updateRoute(req, res, next) {
     //   } else return user;
     // })
     .then((user) => {
-      if(!user) return res.notFound();
+      if (!user) return res.notFound();
 
-      for(const field in req.body) {
+      for (const field in req.body) {
         user[field] = req.body[field];
       }
 
@@ -56,7 +56,7 @@ function updateRoute(req, res, next) {
     })
     .then((user) => res.redirect(`/users/${user.id}`))
     .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest(`/users/${req.params.id}/edit`, err.toString());
+      if (err.name === 'ValidationError') return res.badRequest(`/users/${req.params.id}/edit`, err.toString());
       return next(err);
     });
 }
