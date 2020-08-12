@@ -30,7 +30,7 @@ app.use(express.static(`${__dirname}/public`));
 mongoose
   .connect(dbURI, dbOPS)
   .then(res => console.log('DB Connected'))
-  .catch(err => console.log('Db Connection Failed '));
+  .catch(err => console.log('DB Connection Failed '));
 
 // set up middleware
 if (env !== 'test') app.use(morgan('dev'));

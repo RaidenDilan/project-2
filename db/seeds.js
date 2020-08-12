@@ -1,8 +1,12 @@
-const mongoose = require('mongoose');
+require('dotenv').config();
 const { dbURI, dbOPS } = require('../config/environment');
-
+const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect(dbURI, dbOPS);
+
+mongoose
+  .connect(dbURI, dbOPS);
+  // .then(res => console.log('DB Connected'))
+  // .catch(err => console.log('DB Connection Failed ', err));
 
 const Resort = require('../models/resort');
 const User = require('../models/user');
