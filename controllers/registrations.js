@@ -12,6 +12,7 @@ function createRoute(req, res, next) {
 
   User
     .create(req.body)
+    // .then((response) => res.json(response))
     .then(() => res.redirect('/login'))
     .catch((err) => {
       if (err.name === 'ValidationError') {

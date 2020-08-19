@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
 //   .virtual('src')
 //   .get(function getImageSRC() {
 //     if(!this.filename) return null;
-//     return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.filename}`;
+//     return `https://s3-eu-west-2.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.filename}`;
 //   });
 
 userSchema
@@ -32,7 +32,7 @@ userSchema
   .get(function getProfileImageSRC() {
     if (!this.profileImage) return null;
     if (this.profileImage.match(/^http/)) return this.profileImage;
-    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.profileImage}`;
+    return `https://s3-eu-west-2.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.profileImage}`;
   });
 
 userSchema.virtual('passwordConfirmation').set(function setPasswordConfirmation(passwordConfirmation) {

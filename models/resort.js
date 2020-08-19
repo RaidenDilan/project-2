@@ -31,7 +31,7 @@ resortSchema
   .get(function ImageSRC() {
     if (!this.image) return null;
     if (this.image.match(/^http/)) return this.image;
-    return `https://s3-eu-west-1.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
+    return `https://s3-eu-west-2.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${this.image}`;
   });
 
 
